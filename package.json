@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Jordan883/storyboard#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "mongodb": "^4.10.0"
   }
 }
