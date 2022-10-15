@@ -1,4 +1,4 @@
-# config
+# `config`
 
 The config directory contains various configuration files for the app as a whole. Right now, this folder contains files that configure mongodb.
 

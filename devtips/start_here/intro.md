@@ -34,7 +34,7 @@ Moving back to our site anatomy, most websites also need a **database.** The dat
 
 For our website, we'll be using **MongoDB.** Mongo is a super-flexible database that's relatively easy to pick up once you have a good understanding of objects in Javascript. Basically, Mongo stores data as *documents* (i.e. JSON format) that work in the exact same way that objects do in Javascript. So once you understand JS objects, Mongo isn't too far off from it.
 
-To work with MongoDB, you'll need to [install and run it on your machine.](https://www.mongodb.com/docs/manual/installation/ "MongoDB Install/Run Tutorial"). Then, in the backend, you can interact with it using the mongodb package from npm.
+To work with MongoDB, you'll need to [install and run it on your machine.](https://www.mongodb.com/docs/manual/installation/ "MongoDB Install/Run Tutorial") Then, in the backend, you can interact with it using the mongodb package from npm.
 
 MongoDB can be a bit finicky at times! If you ever have any questions or need help with Mongo, ping me in Slack and we can work through it together :D
 
@@ -74,3 +74,7 @@ I'm not as experienced/confident in React as with the other parts of our site. I
 ### Putting it Together
 
 In total, the main set of tech (or *"tech stack"*) that we'll be using is **M**ongoDB, **E**xpress API, **R**eact, and **N**ode.js. Thus, we're using the **MERN** stack!
+
+## Where to Look Next
+
+I would recommend looking at `modules.md` next to learn about some of the basics of how our files will work together.

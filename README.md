@@ -14,12 +14,12 @@ Before downloading this program, you'll need to install the following items to y
 
 ### Downloading/Running the Program
 
-**Download**
+#### Download
 
 1. *git clone* this repo to your computer.
 2. On the command line, go to the repo folder and run *npm i.*
 
-**Run**
+#### Run
 
 1. If MongoDB is not running, turn it on.(***MongoDB must be running on your machine before you can use the website.*** If you installed MongoDB as a service, it will always run in the background, but otherwise, you need to run it manually.)
 2. Run *npm start* to start the web server on your computer.
