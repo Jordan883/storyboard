@@ -83,4 +83,11 @@ async check(email,password){
     else return false
 }
 
+// async check(email,password){
+//     const userCollection=await users()
+//     const user = await userCollection.findOne({ email: email });
+//     if (user === null) throw 'No user with that id';
+//     if(user.password===password) return true
+//     else return false
+// }
 }
