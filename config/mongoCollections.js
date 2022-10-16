@@ -19,4 +19,7 @@ const getCollectionFn = (collection) => {
 module.exports = {
   articles: getCollectionFn('articles')
   //TODO: Add collections as needed (per the data directory)
+  users:getCollectionFn('users'),
+  families:getCollectionFn('families'),
+  articles:getCollectionFn('articles')
 };

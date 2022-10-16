@@ -1,17 +1,12 @@
-// TODO: Add output instructions for when this app runs. 
-const articles = require('./data/articles');
-const connection = require('./config/mongoConnection');
+const express = require('express');
+const app = express();
+const configRoutes = require('./routes');
 
-const main = async () => {
-    const db = await connection.dbConnection();
-    await db.dropDatabase();
+app.use(express.json());
 
-    // Create and add a movie
-    const firstArticle = await articles.createArticle(
-        'Hello from StoryBoard!'
-    );
+configRoutes(app);
 
-    await connection.closeConnection();
-};
-
-main();
+app.listen(3000, () => {
+  console.log("We've now got a server!");
+  console.log('Your routes will be running on http://localhost:3000');
+});
