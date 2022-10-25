@@ -4,7 +4,7 @@
   "description": "A story-writing app where kids can share their writing and parents can moderate content. Project for CS-555. ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node app.js"
   },
   "repository": {
