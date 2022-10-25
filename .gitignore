@@ -2,4 +2,5 @@
 node_modules/
 
 # Ignore package-lock
+# NOTE: We may need to track this for actions to work. 
 package-lock.json
