@@ -31,6 +31,5 @@ Before downloading this program, you'll need to install the following items to y
 
 ## Developer Tips
 
-* I've placed a devtips.md file in each directory to explain what it does and what should go there. Checking those will be helpful for understanding how this site should be developed. I'll add more to the docs as I learn more/review some web code.
-* I've also created a devtips directory where I'll keep my more general notes on web development/the project.
+* Earlier, we used a system of devtips.md markdown files to hel document this program and some code tips. We've now moved these files to the [storyboard GitHub wiki!](https://github.com/Jordan883/storyboard/wiki "storyboard Github wiki")
 * We're all here to learn and have fun doing it. If you have any questions, feel free to ping me on Slack. Good luck and happy programming! - Jordan :)
