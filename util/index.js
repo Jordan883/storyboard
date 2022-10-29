@@ -4,7 +4,7 @@ var options = {};
 var myxss = new xss.FilterXSS(options);
 
 exports.parseDate = function (date) {
-    return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDay();
+    return date.getFullMonth() + '-' + date.getDay() + 1 + '-' + date.getYear();
 };
 
 exports.xssfilter = function (input) {
