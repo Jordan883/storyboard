@@ -2,9 +2,6 @@ const mongoCollections = require('../config/mongoCollections');
 const articles = mongoCollections.articles;
 const {ObjectId} = require('mongodb');
 
-var express = require('express');
-
-
 // const createArticle = async (
 //   content
 // ) => {
