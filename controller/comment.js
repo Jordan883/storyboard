@@ -14,8 +14,8 @@ class Utils {
 async create(ctx) {
     try {
         const data = await new Comment({...ctx.request.body }).save();
-        CallbackModel(ctx, 200, 'Comment successfully created', data)
+        let CallbackModel = new CallbackModel(ctx, 200, 'Comment successfully created', data);
     } catch (error) {
-        CallbackModel(ctx, 500, 'Error', JSON.stringify(error))
+        let CallbackModel = new CallbackModel(ctx, 500, 'Error', JSON.stringify(error));
     }
 }
