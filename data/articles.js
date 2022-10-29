@@ -23,7 +23,7 @@ const {ObjectId} = require('mongodb');
 // };
 
 var fs = require('fs');
-var image = require("imageinfo");
+var image = require('imageinfo');
 
 function readFileList(path, filesList) {
         var files = fs.readdirSync(path);
