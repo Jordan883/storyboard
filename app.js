@@ -15,6 +15,7 @@ const config = {
 
 app.use(express.json());
 app.use(auth(config));
+  // '/login', '/logout', and '/callback' are taken. 
 configRoutes(app);
 
 app.listen(3000, () => {

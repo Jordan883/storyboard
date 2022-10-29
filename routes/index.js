@@ -2,7 +2,7 @@ const authRoutes = require('./auth');
 const usersRoutes = require('./users');
 
 const constructorMethod = (app) => {
-  app.use(authRoutes);
+  app.use('/auth', authRoutes);
   app.use('/users', usersRoutes);
 
   app.use('*', (req, res) => {
