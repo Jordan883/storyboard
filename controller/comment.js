@@ -19,3 +19,6 @@ async create(ctx) {
         let CallbackModel = new Utils(ctx, 500, 'Error', JSON.stringify(error));
     }
 }
+
+const commentcontroller = new Utils ();
+module.exports = commentcontroller;
