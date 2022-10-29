@@ -40,6 +40,26 @@ function readFileList(path, filesList) {
         })
     }
 
+ var getFiles = {
+        getFileList: function (path) {
+            var filesList = [];
+            readFileList(path, filesList);
+            return filesList;
+        },
+        getImageFiles: function (path) {
+            var imageList = [];
+            this.getFileList(path).forEach((item) => {		
+                var ms = image(fs.readFileSync(item.path + item.filename));
+				console.log(ms);
+                ms.mimeType && (imageList.push(item.filename))
+            });
+            return imageList;
+        }
+    };
+
+// getFiles.getImageFiles("XXX");
+// getFiles.getFileList("XXX");
+
 // module.exports = {
 //   createArticle
 
