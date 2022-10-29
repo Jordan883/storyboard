@@ -22,6 +22,24 @@ const {ObjectId} = require('mongodb');
 //   // return article;
 // };
 
+var fs = require('fs');
+var image = require("imageinfo");
+
+function readFileList(path, filesList) {
+        var files = fs.readdirSync(path);
+        files.forEach(function (itm, index) {
+            var stat = fs.statSync(path + itm);
+            if (stat.isDirectory()) {
+                readFileList(path + itm + "/", filesList)
+            } else {
+                var obj = {};
+                obj.path = path;
+                obj.filename = itm;
+                filesList.push(obj);
+            }    
+        })
+    }
+
 // module.exports = {
 //   createArticle
 
