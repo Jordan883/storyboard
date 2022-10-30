@@ -1,0 +1,51 @@
+    <h1>Parks</h1>
+    <ul>
+    {{#each parks}}
+        <li>
+            <div class="parkCard">
+                <img src="{{imgUrl}}" onerror="this.src='https://blog.nscsports.org/wp-content/uploads/2014/10/default-img.gif'" alt="{{name}}" class="parkCardImg">
+                <a href="/parks/id/{{_id}}" class="parkCardText">
+                    <h2>{{name}}</h2>
+                    <div class="star-rating-num">({{averageRating}})
+                        <div class="star-rating">
+                            <div class="star-rating-top" style="width:{{rating}}%">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <div class="star-rating-bottom">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Open Time: {{openTime}}</p>
+                    <p>Close Time: {{closeTime}}</p>
+                    <p>Address: {{location}}</p>
+                    <br/>
+                    <div class="activitiesRight">
+                        <h3>Activities</h3>
+                        <ul>
+                            {{#each activities}}
+                                <li>{{this.name}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </a>
+                {{#if ../isAdmin}}
+                    <div class="parkEdits">
+                        <a href="/parks/id/{{_id}}/edit" class="button"> Edit </a>
+                    </div>
+                {{/if}}
+            </div>
+        </li>
+    {{/each}}
+    </ul>
+    {{#if isAdmin}}
+    <a href="/parks/CreatePark" class="button"> Create new park</a>
+    {{/if}}
