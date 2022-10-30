@@ -1,0 +1,29 @@
+{
+  "name": "storyboard",
+  "version": "1.0.0",
+  "description": "A story-writing app where kids can share their writing and parents can moderate content. Project for CS-555. ",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordan883/storyboard.git"
+  },
+  "author": "Chun Chen, Jordan Fernandes, Kaijie Ma, Siyan Liu, Wenjing Zhou, Yifan Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jordan883/storyboard/issues"
+  },
+  "homepage": "https://github.com/Jordan883/storyboard#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.9.0",
+    "mongodb": "^4.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
+}
