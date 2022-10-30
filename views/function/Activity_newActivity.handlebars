@@ -1,0 +1,45 @@
+<header>
+    <h1>
+        CREATE A NEW ACTIVITY
+    </h1>
+</header>
+
+
+<div >
+    <form action="/parks/createnewActivity" method="POST" id="login-form">
+        <div class="login">
+            <label for="park">Park:</label>
+            <select id="park" name="park">
+                {{#each ParkList}}
+                <option>{{this.name}}</option>
+                {{/each}}
+            </select> 
+        </div>
+        <div class="login">
+            <label>activity:</label>
+            <input type="text" name="activity" class="textInput"/>
+        </div>
+        <div class="login">
+            <label>numberOfCourts:</label>
+            <input type="text" name="numberOfCourts" class="textInput"/>
+        </div>
+        <div class="login">
+            <label>maxPeople:</label>
+            <input type="text" name="maxPeople" class="textInput"/>
+        </div>
+        <div class="login">
+            <label>limit:</label> 
+            <input type="text" name="limit" class="textInput"/>
+        </div>
+        <div class="login">
+            <label>description:</label> 
+            <input type="text" name="description" class="textInput"/>
+        </div>
+        <div>
+            <button type="submit" class="button">Create</button>
+        </div>
+    </form>
+    {{#if error}}
+	    <p >{{error}}</p>
+	  {{/if}}
+</div>

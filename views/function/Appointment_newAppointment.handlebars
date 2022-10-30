@@ -1,0 +1,43 @@
+<header>
+    <h1>
+        CREATE A NEW APPOINTMENT
+    </h1>
+</header>
+
+<div >
+    <form action="/appointments/newAppointment" method="POST" id="login-form">
+        <div class="login">
+            <label for="park">Park:</label>
+            <select id="park" name="park">
+                {{#each parks}}
+                <option>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="login">
+            <label for="activity">Activity:</label>
+            <select id="activity" name="activity">
+                {{#each activities}}
+                <option>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="date">
+            <p>Month:</p>
+            <input type="text" id="month" name="month" placeholder="please input the future date"/> 
+            <p>Day:</p>
+            <input type="text" id="day" name="day" placeholder="please input the future date"/>
+            <p>Year:</p>
+            <input type="text" id="year" name="year" placeholder="please input the future date"/> 
+            <p>Time:</p>
+            <input type="text" id="hour" name="hour" placeholder="can only input an integer"/>
+        </div>
+
+        <div>
+            <button type="submit" class="button">Create</button>
+        </div>
+    </form>
+    {{#if error}}
+	    <p >{{error}}</p>
+	  {{/if}}
+</div>
