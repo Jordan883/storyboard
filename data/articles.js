@@ -2,6 +2,15 @@ const mongoCollections = require('../config/mongoCollections');
 const articles = mongoCollections.articles;
 const {ObjectId} = require('mongodb');
 
+// BASIC FUNCTIONS: (Which every data module should have!)
+// Create
+// Get all
+// Get one (by ID)
+// Delete one (by ID)
+// Update one (by ID)
+
+// We can add custom functions as we need them. 
+
 // const createArticle = async (
 //   content
 // ) => {
