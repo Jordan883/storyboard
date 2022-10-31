@@ -1,36 +1,78 @@
-# Storyboard
+# CS-546-Project Park Activity Meet-Up
 
-A story-writing app where kids can share their writing and parents can moderate content. Project for CS-555.
+## Introduction
 
-## Installation/How To Run
+Park Activity Meet-Up is a Hoboken specific application to connect users to build relationships and use everything hoboken parks have to offer...
 
-### Dependencies
+## Installation
 
-Before downloading this program, you'll need to install the following items to your computer:
+Before following the installation instructions below, your system will need node.js.
 
-* [git](https://git-scm.com/downloads "Git Installation")
-* [MongoDB](https://www.mongodb.com/docs/manual/installation/ "MongoDB Install/Run Tutorial")
-* [Node.js](https://nodejs.org/en/ "Node.js Installation")
+1. `npm install` - installs all the package dependencies
+2. `npm run seed` - seed database
+3. `npm test` - run the tests (optional)
+4. `npm start` - run the application
 
-### Downloading/Running the Program
+## Task: Select your task and add your name
 
-#### Download
+1. Database: Yue Qin
+   - User: Wenjing Zhou :white_check_mark:
+   - Activitiy: Yutong Wei :white_check_mark:
+   - Appointment: Yuheng Xiao :white_check_mark:
+   - Comment: Yue Qin :white_check_mark:
+   - Review: Yue Qin :white_check_mark:
+   - Park: David Yang :white_check_mark:
+2. Route:
 
-1. *git clone* this repo to your computer.
-2. On the command line, go to the repo folder and run *npm i.*
+   - Home:
+     - ('/home').get Wenjing Zhou :white_check_mark:
+   - Login:
+     - ('/login').post Wenjing Zhou :white_check_mark:
+   - Logout:
+     - ('/logout').get Wenjing Zhou :white_check_mark:
+   - Signup:
+     - ('/signup').get Wenjing Zhou :white_check_mark:
+     - ('/signup').post Wenjing Zhou :white_check_mark:
+   - Parks:
+     - ('/parks').get David Yang :white_check_mark:
+     - ('/parks/id/:id').get David Yang :white_check_mark:
+     - ('/parks/search').get Yutong Wei :white_check_mark:
+     - ('/parks/allParks').get Yutong Wei :white_check_mark:
+     - ('/parks/comments').get Yue Qin :white_check_mark:
+     - ('/parks/comments').post Yue Qin :white_check_mark:
+     - ('/parks/activities').get Yutong Wei :white_check_mark:
+     - ('/parks/activities').post Yutong Wei :white_check_mark:
+     - ('appointments').get Yuheng Xiao :white_check_mark:
+     - ('appointments').post Yuheng Xiao :white_check_mark:
+     - ('appointments/match').post Yuheng Xiao :white_check_mark:
+   - Users:
+     - ('/users').get Wenjing Zhou :white_check_mark:
+     - ('/users/reviews').get Yue Qin :white_check_mark:
+     - ('/users/reviews').post Yue Qin :white_check_mark:
+     - ('/users/notification').get
+     - ('/users/profile').get Wenjing Zhou :white_check_mark:
+     - ('/users/profile').post
 
-#### Run
+3. Frontend:
+   - Home Page: Yue Qin :white_check_mark:
+   - Login/Signup Page: Yue Qin :white_check_mark:
+   - Park List Page:
+   - User Profile Page:
+   - Park activities management Page:
+   - Activity Page: Yutong Wei :white_check_mark:
+   - Park Activities Appointment Page: Yuheng Xiao :white_check_mark:
 
-1. If MongoDB is not running, turn it on.(***MongoDB must be running on your machine before you can use the website.*** If you installed MongoDB as a service, it will always run in the background, but otherwise, you need to run it manually.)
-2. Run *npm start* to start the web server on your computer.
-3. Follow the output instructions to see the website.
+## Team Members
 
-## Tips/Debugs
+David Yang: parks page (database, routes, front end), single park page, edit park form, add new park form, favorite park feature. Refactoring
 
-* Under config/settings.json, you may need to change the serverURL to localhost (instead of 127.0.0.1). Generally, 127.0.0.1 works for Windows; localhost works for other OS.
+Yue Qin
 
-## Developer Tips
+Yutong Wei: In charge of activity section(database, routes, front end).
 
-* I've placed a devtips.md file in each directory to explain what it does and what should go there. Checking those will be helpful for understanding how this site should be developed. I'll add more to the docs as I learn more/review some web code.
-* I've also created a devtips directory where I'll keep my more general notes on web development/the project.
-* We're all here to learn and have fun doing it. If you have any questions, feel free to ping me on Slack. Good luck and happy programming! - Jordan :)
+Yuheng Xiao: In charge of the feature of creating new activities (database, routes, front end), adding error checking and XSS for each router.
+
+Wenjing Zhou: Complete the user profile page; single activity page; some routes of activity; data and routes of user; data and routes of appointment; data and reviews of reviews; page of myappointment and create new appointment; page of about; html check; 
+## Github Repository
+
+[https://github.com/davidtayloryangg/CS-546-Project]

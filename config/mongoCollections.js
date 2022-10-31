@@ -7,7 +7,7 @@ const getCollectionFn = (collection) => {
 
   return async () => {
     if (!_col) {
-      const db = await dbConnection.dbConnection();
+      const db = await dbConnection.connectToDb();
       _col = await db.collection(collection);
     }
 
@@ -17,8 +17,8 @@ const getCollectionFn = (collection) => {
 
 /* Now, you can list your collections here: */
 module.exports = {
-  //TODO: Add collections as needed (per the data directory)
-  users:getCollectionFn('users'),
-  families:getCollectionFn('families'),
-  articles:getCollectionFn('articles')
+  users: getCollectionFn("users"),
+  parks: getCollectionFn("parks"),
+  appointments:getCollectionFn("appointments"),
+  articles:getCollectionFn("articles")
 };

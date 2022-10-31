@@ -1,10 +1,19 @@
-const usersRoutes = require('./users');
+const home = require("./home");
+const users = require("./users");
+const about = require("./about");
+const articles = require("./articles");
+
+var xss = require("xss");
 
 const constructorMethod = (app) => {
-  app.use('/users', usersRoutes);
+  // app.uses go here
+  app.use("/", home);
+  app.use("/users", users);
+  app.use("/about",about);
+  app.use("/articles", articles)
 
-  app.use('*', (req, res) => {
-    res.sendStatus(404);
+  app.all("*", (req, res) => {
+    res.status(404).json("Error 404: ");
   });
 };
 

@@ -1,0 +1,26 @@
+<header>
+    <h1>
+        CREATE A NEW ARTICLE
+    </h1>
+</header>
+
+<div >
+    <form action="/articles/newArticle" method="POST" id="login-form">
+        <div class="date">
+            <p>Title:</p>
+            <input type="text" id="title" name="title"/> 
+
+            <p>Content:</p>
+            <textarea type="text" id="content" name="content" style="width:500px; height:400px;">
+            </textarea>    
+        </div>
+
+        <div>
+            <button type="submit" class="button">Post</button>
+        </div>
+
+    </form>
+    {{#if error}}
+	    <p >{{error}}</p>
+	  {{/if}}
+</div>
