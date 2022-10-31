@@ -14,7 +14,7 @@ const stringHandler = (string, name) => {
 };
 
 const strToId = (idString, name) => {
-    if (!ObjectId.isValid(idString)) throw `Error: ${name} Object ID is not valid`;
+    if (!ObjectId.isValid(idString)) throw `Error: ${name} Object ID is not valid.`;
     return ObjectId(idString);
 }
 
@@ -28,6 +28,7 @@ const idHandler = (idString, name) => {
 
 // Works with primitives, not sure for objects! Be careful!
 const removeDuplicates = (array) => {
+    if (!Array.isArray(array)) throw 'Error: removeDuplicates received a non-array item.';
     const newArray = [];
     for (let item of array){
         if (!newArray.includes(item)) newArray.push(item);
@@ -37,6 +38,8 @@ const removeDuplicates = (array) => {
 
 // Works on one-dimension arrays with primitives and no duplicates
 const arrayContentEquality = (array1, array2) => {
+    if (!Array.isArray(array1)) throw 'Error: First input is a non-array item.';
+    if (!Array.isArray(array2)) throw 'Error: Second input is a non-array item.';
     if (array1.length != array2.length){
         return false;
     }
