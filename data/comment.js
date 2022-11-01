@@ -6,7 +6,7 @@ const { ObjectId } = require('mongodb');
 
 module.exports = {
   async createComment(articleId, userId, articleComment) {
-    if (!parkId || !userId || !parkComment) throw 'please provide all inputs for comment';
+    if (!articleId || !userId || !articleComment) throw 'please provide all inputs for comment';
     if (arguments.length != 4) throw 'the number of parameter is wrong';
     if (!ObjectId.isValid(articleId)) throw 'invalid article ID';
     if (!ObjectId.isValid(userId)) throw 'invalid user ID';
