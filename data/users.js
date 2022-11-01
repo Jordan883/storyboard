@@ -8,13 +8,14 @@ function checkid(id)
     return parsedId;
 }
 module.exports = {
-async create(type,email,username,password){
+async create(type,email,username,name,password){
     const userCollection = await users();
-
+    if(!this.check(email,password)) throw'the email or password is wrong'
     let newuser = {
         type:type,
         email:email,
         username:username,
+        name:name,
         password:password
     };
 
@@ -26,9 +27,9 @@ async create(type,email,username,password){
     return user;
 },
 
-async get(id){
+async get(email){
     const userCollection=await users()
-    const user = await userCollection.findOne({ _id: checkid(id) });
+    const user = await userCollection.findOne({ email:email });
     user._id=user._id.toString()
     return user
 },
@@ -36,12 +37,19 @@ async get(id){
 async delete(id)
 {
     const userCollection = await users();
-    const user = await this.get(id);
+    const user = await userCollection.findOne({_id:checkid(id)})
     const deletionInfo = await userCollection.deleteOne({ _id: checkid(id) });
     if (deletionInfo.deletedCount === 0) {
         throw `Could not delete user with id of ${id}`;
     }
     return `${user.username} has been successfully deleted!`;
+},
+
+async check(email,password){
+    const userCollection=await users();
+    const user=await this.get(email)
+    if(user.password==password) return true
+    else return false
 }
 
 }
