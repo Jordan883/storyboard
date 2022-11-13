@@ -27,4 +27,13 @@ module.exports = {
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw 'Could not add a comment';   
   },
+  async getAllComments(articleId) {
+    if (!articleId) throw 'please provide article id';
+    if (!ObjectId.isValid(articleId)) throw 'invalid article id';
+    
+    const articlecollection = await articles();
+    const articlelist = await articlecollection.find({_id: ObjectId(articleId) }, { projection: { comments: 1 } }).toArray();
+    if (!articlelist || articlelist === null) gthrow 'no article with that id';
+    return articlelist;
+  },  
 }
