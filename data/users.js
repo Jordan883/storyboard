@@ -2,11 +2,12 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 let { ObjectId } = require('mongodb');
 
-function checkid(id)
-{
+function checkid (id) {
+    if (!ObjectId.isValid(id)) throw 'Error: User Object ID is not valid';
     let parsedId = ObjectId(id);
     return parsedId;
 }
+
 module.exports = {
 async create(type,email,username,password){
     const userCollection = await users();
@@ -31,6 +32,10 @@ async get(id){
     const user = await userCollection.findOne({ _id: checkid(id) });
     user._id=user._id.toString()
     return user
+},
+
+async updateUser(){
+    //TODO: Implement
 },
 
 async delete(id)

@@ -1,5 +1,11 @@
 # Ignore node_modules
 node_modules/
 
+# Ignore image uploads
+images/
+
 # Ignore .env
 .env
+
+# TEMPORARY TEST BYPASS
+families.test.js

@@ -18,7 +18,8 @@ const getCollectionFn = (collection) => {
 /* Now, you can list your collections here: */
 module.exports = {
   //TODO: Add collections as needed (per the data directory)
-  users:getCollectionFn('users'),
+  articles:getCollectionFn('articles'),
+  comments: getCollectionFn('comments'),
   families:getCollectionFn('families'),
-  articles:getCollectionFn('articles')
+  users:getCollectionFn('users')
 };
