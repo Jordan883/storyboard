@@ -2,44 +2,30 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data/articles");
 const userdata = require("../data/users");
+const { requiresAuth } = require('express-openid-connect');
 var xss = require("xss");
 
-router.get("/", async (req, res) => {
-  if (!req.session.user) {
-    res.status(400).redirect("/users");
-  } else {
+router.get("/", requiresAuth(), async (req, res) => {
     res.status(200).render("function/Articles_Menu", {
     });
-  }
 });
 
-router.post("/", async (req, res) => {
-  if (!req.session.user) {
-    res.status(400).redirect("/users");
-  } else {
+router.post("/", requiresAuth(), async (req, res) => {
     res.status(200).render("function/Articles_Menu", {
     });
-  }
 });
 
-router.get("/newArticle", async (req, res) => {
-  if (!req.session.user) {
-    res.status(400).redirect("/users");
-  } else {
+router.get("/newArticle", requiresAuth(), async (req, res) => {
     res.status(200).render("function/Articles", {
     });
-  }
 });
 
-router.post("/newArticle", async (req, res) => {
-  if (!req.session.user) {
-    res.status(400).redirect("/users");
-  } else {
+router.post("/newArticle", requiresAuth(), async (req, res) => {
     try {
       var body = req.body;
       
       // get user info
-      const user = await userdata.getUserByEmail(req.session.user.email);
+      // const user = await userdata.getUserByEmail(req.session.user.email);
       
       // get input
       const title = xss(body.title);
@@ -48,7 +34,8 @@ router.post("/newArticle", async (req, res) => {
 
       // get article infos
       const Article = await data.createArticle(
-        user.firstname.toString(),
+        // user.firstname.toString(),
+        'DummyName',
         title,
         content,
 
@@ -63,7 +50,6 @@ router.post("/newArticle", async (req, res) => {
         .status(500)
         .render("function/Appointment_Error", { error: e, title: "Error" });
     }
-  }
 });
 
 module.exports = router;
