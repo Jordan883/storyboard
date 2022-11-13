@@ -7,7 +7,6 @@ const { ObjectId } = require('mongodb');
 module.exports = {
   async createComment(articleId, userId, articleComment) {
     if (!articleId || !userId || !articleComment) throw 'please provide all inputs for comment';
-    if (arguments.length != 4) throw 'the number of parameter is wrong';
     if (!ObjectId.isValid(articleId)) throw 'invalid article ID';
     if (!ObjectId.isValid(userId)) throw 'invalid user ID';
 
@@ -18,6 +17,7 @@ module.exports = {
       aricleId: articleId,
       userId: userId,
       articleComment: articleComment,
+      timestamp: date.toDateString(),
     };
 
     const articleCollection = await articles();
@@ -26,5 +26,5 @@ module.exports = {
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw 'Could not add a comment';   
-  },  
+  },
 }
