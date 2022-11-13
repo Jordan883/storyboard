@@ -27,6 +27,9 @@ module.exports = {
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw 'Could not add a comment';   
   },
+  async removeComment(commentId) {
+    let article = await artilecollection.findone // to be continued //
+    
   async getAllComments(articleId) {
     if (!articleId) throw 'please provide article id';
     if (!ObjectId.isValid(articleId)) throw 'invalid article id';
