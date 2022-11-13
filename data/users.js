@@ -34,6 +34,10 @@ async get(id){
     return user
 },
 
+async updateUser(){
+    //TODO: Implement
+},
+
 async delete(id)
 {
     const userCollection = await users();

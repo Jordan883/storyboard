@@ -1,6 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const families = mongoCollections.families;
 const {ObjectId} = require('mongodb');
+const users = require('./users')
 const helpers = require('./helpers');
 
 const idsToStrings = (family) => {
@@ -22,13 +23,40 @@ const idsToStrings = (family) => {
     return family;
 }
 
+const updateUserFamilies = async (userIds, value) => {
+    for (let userId of userIds){
+        const user = await users.get(userId);
+        user.family = value;
+        //TODO: Implement in users.
+        await users.updateUser(
+            userId,
+            user.type,
+            user.email,
+            user.name,
+            user.username,
+            user.password,
+            user.family,
+            user.content_restrict
+        );
+    }
+}
+
 // children, articleWriteHistory, articleViewHistory, commentHistory are initialized empty. 
 const createFamily = async (
     parents
 ) => {
+    if (!Array.isArray(parents) || parents.length === 0) {
+        throw 'Error: Array of one or more parent Object IDs must be provided.';
+    }
+
     parents = parents.map(id => helpers.stringHandler(id, 'Parent Object ID'));
     parents = helpers.removeDuplicates(parents);
     parents = parents.map(id => helpers.strToId(id, 'Parent'));
+
+    // Verify that each parent user exists.
+    for (let parent of parents) {
+        await users.get(parent.toString());
+    }
 
     const newFamily = {
         parents: parents,
@@ -46,6 +74,9 @@ const createFamily = async (
     
     const newId = insertInfo.insertedId.toString();
     const family = await getFamilyById(newId);
+
+    await updateUserFamilies(family.parents, newId);
+
     return family;
 }
 
@@ -76,6 +107,13 @@ const updateFamily = async (
 ) => {
     const family = await getFamilyById(id);
 
+    if (!Array.isArray(parents) || parents.length === 0) {
+        throw 'Error: Array of one or more parent Object IDs must be provided.';
+    }
+    if (!Array.isArray(children)) {
+        throw 'Error: Array of zero or more children Object IDs must be provided.';
+    }
+
     parents = parents.map(id => helpers.stringHandler(id, 'Parent Object ID'));
     parents = helpers.removeDuplicates(parents);
     children = children.map(id => helpers.stringHandler(id, 'Child Object ID'));
@@ -83,13 +121,24 @@ const updateFamily = async (
 
     if (helpers.arrayContentEquality(family.parents, parents) && 
         helpers.arrayContentEquality(family.children, children)) {
-        
-        throw 'Error: Family update inputs are same as current'
+        throw 'Error: Family update inputs are same as current.'
     }
 
-    id = helpers.idHandler(id);
+    id = helpers.idHandler(id, 'Family');
     parents = parents.map(id => helpers.strToId(id, 'Parent'));
     children = children.map(id => helpers.strToId(id, 'Child'));
+
+    // Check that all input parents and children exist.
+    for (let parent of parents) {
+        await users.get(parent.toString());
+    }
+    for (let child of children) {
+        await users.get(child.toString());
+    }
+
+    // Wipe family for all users currently in the family object.
+    await updateUserFamilies(family.parents, null);
+    await updateUserFamilies(family.children, null);
 
     const updatedFamily = {
         parents: parents,
@@ -108,7 +157,13 @@ const updateFamily = async (
         throw 'Error: Could not update the family successfully';
     }
     
-    return await getFamilyById(id.toString());
+    const newFamily =  await getFamilyById(id.toString());
+
+    // Update all current parents and children to have the family id.
+    await updateUserFamilies(newFamily.parents, newFamily._id);
+    await updateUserFamilies(newFamily.children, newFamily._id);
+
+    return newFamily;
 }
 
 const removeFamily = async (id) => {
