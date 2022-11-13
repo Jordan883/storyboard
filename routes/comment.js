@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data/comments');
-const func = require('../data/functions');
+const func = require('../data/function');
 var xss = require("xss");
 
 router.post(async (req, res) => {
