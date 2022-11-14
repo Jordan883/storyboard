@@ -6,7 +6,7 @@ function checkId(string) {
 function checkString(string) {
   if (!string)
     return false;
-  if (typeof string === 'stringt' || string instanceof String) {
+  if (typeof string === 'string' || string instanceof String) {
     if (string.trim().length === 0)
       return false;
   } else {
