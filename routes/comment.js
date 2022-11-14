@@ -4,7 +4,16 @@ const data = require('../data/comments');
 const func = require('../data/function');
 var xss = require("xss");
 
-router.post(async (req, res) => {
+router
+  .get(async (req, res) => {
+  try {
+    const comments = await data.getAllComments();
+    res.status(200).json(comments);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+})
+  .post(async (req, res) => {
   try {
     let commentInfo = req.body;
     if (!commentInfo.articleId || !commentInfo.articleComment) throw 'Please provide all inputs';
