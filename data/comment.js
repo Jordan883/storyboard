@@ -1,4 +1,4 @@
-const func = require('./functions');
+const func = require('./function');
 const mongoCollections = require('../config/mongoCollections');
 const articles = mongoCollections.articles;
 const userdata = require("./users");
@@ -27,15 +27,27 @@ module.exports = {
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw 'Could not add a comment';   
   },
-  async removeComment(commentId) {
-    let article = await artilecollection.findone // to be continued //
-    
+ async removeComment(commentId) {
+    if (!commentId) throw 'please provide comment id';   
+    if (!ObjectId.isValid(commentId)) throw 'invalid comment ID';
+
+    const articleCollection = await articles();
+    let article = await articleCollection.findOne({ "comments._id": ObjectId(commentId) });
+    if (article === null) throw 'No comment with that id';
+    const updateInfo = await articleCollection.updateOne(
+      { _id: ObjectId(article._id) },
+      { $pull: { comments: { _id: ObjectId(commentId) } } }
+    );
+    if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+      throw 'Could not remove that comment';    
+    return true;
+  },    
   async getAllComments(articleId) {
     if (!articleId) throw 'please provide article id';
     if (!ObjectId.isValid(articleId)) throw 'invalid article id';
     
     const articlecollection = await articles();
-    const articlelist = await articlecollection.find({_id: ObjectId(articleId) }, { projection: { comments: 1 } }).toArray();
+    const articlelist = await articlecollection.find({ _id: ObjectId(articleId) }, { projection: { comments: 1 } }).toArray();
     if (!articlelist || articlelist === null) gthrow 'no article with that id';
     return articlelist;
   },  
