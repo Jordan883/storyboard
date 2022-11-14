@@ -15,6 +15,7 @@ const config = {
   issuerBaseURL: 'https://dev-kn-xijmw.us.auth0.com'
 };
 
+
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.use(express.urlencoded({ extended: true }));

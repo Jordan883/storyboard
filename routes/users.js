@@ -40,7 +40,6 @@ router.delete('/', async (req, res) => {
 });
 
 router.get("/register", async (req, res) => {
-  console.log(req.oidc.isAuthenticated())
   if (req.oidc.isAuthenticated()) {
     try {
       res.status(200).render("functions/registration");
@@ -60,7 +59,7 @@ router.post("/register", async (req, res) => {
       const email=req.body.email
       const password=req.body.password
       const name=req.body.name
-      const user=await userData.create(type,email,username,name,password)
+      let user=await userData.create(type,email,username,name,password)
       res.status(200).redirect('/')
       
     } catch (e) {
