@@ -134,6 +134,15 @@ describe('Read/Update/Delete Family Tests', () => {
         }
     })
 
+    test('Tests get family by Id no family found', async () => {
+        expect.assertions(1);
+        try {
+            await families.getFamilyById(ObjectId(32).toString());
+        } catch (e) {
+            expect(e).toBe('Error: No family with that id.');
+        }
+    })
+
     test('Tests valid get family by Id', async () => {
         const foundFamily = await families.getFamilyById(family1._id);
         expect(foundFamily).toEqual(family1);
@@ -231,7 +240,7 @@ describe('Read/Update/Delete Family Tests', () => {
         }
     })
 
-    test('Tests parent ID not found on create family', async () => {
+    test('Tests parent ID not found on update family', async () => {
         expect.assertions(1);
         try {
             const noParentFound = 'Error: No user with that ID.';
@@ -242,7 +251,7 @@ describe('Read/Update/Delete Family Tests', () => {
         }
     })
 
-    test('Tests child ID not found on create family', async () => {
+    test('Tests child ID not found on update family', async () => {
         expect.assertions(1);
         try {
             const theParent = {
@@ -291,5 +300,29 @@ describe('Read/Update/Delete Family Tests', () => {
         expect(newParent.family).toBe(family1._id);
         expect(newChild.family).toBe(family1._id);
         expect(users.updateUser.mock.calls.length).toBe(3);
+    })
+
+    test('Tests idHandler call on remove family', async () => {
+        expect.assertions(1);
+        try {
+            await families.removeFamily('bad_id');
+        } catch (e) {
+            expect(e).toBe('Error: Family Object ID is not valid.');
+        }
+    })
+
+    test('Tests valid delete family', async () => {
+        const parent = {
+            _id: family2.parents[0],
+            family: family2._id
+        };
+        users.get.mockResolvedValue(parent);
+        users.updateUser
+            .mockImplementationOnce(() => {
+                parent.family = null;
+            })
+        const deleted = await families.removeFamily(family2._id);
+        expect(parent.family).toBe(null);
+        expect(deleted).toBe('Family has been successfully deleted!');
     })
 })
