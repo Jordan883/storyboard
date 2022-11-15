@@ -170,6 +170,12 @@ const removeFamily = async (id) => {
     id = helpers.idHandler(id, 'Family');
 
     const familyColl = await families();
+
+    // Set applicable users' families to null (and check that family exists).
+    const familyToDelete = await getFamilyById(id.toString());
+    updateUserFamilies(familyToDelete.parents, null);
+    updateUserFamilies(familyToDelete.children, null);
+
     const deletionInfo = await familyColl.deleteOne({_id: id});
     if (deletionInfo.deletedCount === 0) {
         throw `Could not delete movie with id of ${id.toString()}`;
