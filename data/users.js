@@ -10,13 +10,14 @@ function checkid(id)
 module.exports = {
 async create(type,email,username,name,password){
     const userCollection = await users();
-    if(!this.check(email,password)) throw'the email or password is wrong'
     let newuser = {
         type:type,
         email:email,
         username:username,
         name:name,
-        password:password
+        password:password,
+        family:null,
+        content_restrict:null
     };
 
     const insertInfo = await userCollection.insertOne(newuser);
@@ -27,11 +28,40 @@ async create(type,email,username,name,password){
     return user;
 },
 
-async get(email){
+async get(id){
+    const userCollection=await users()
+    const user = await userCollection.findOne({ _id: checkid(id) });
+    user._id=user._id.toString()
+    return user
+},
+
+async getByEmail(email){
     const userCollection=await users()
     const user = await userCollection.findOne({ email:email });
     user._id=user._id.toString()
     return user
+},
+
+async updateUser(id,type,email,name,username,password,family,content_restrict){
+    const userCollection = await users();
+    let modifyuser = {
+        type:type,
+        email: email,
+        username:username,
+        name:name,
+        password:password,
+        family:family,
+        content_restrict:content_restrict
+      };
+  
+      const updatedInfo = await userCollection.updateOne(
+        { _id: ObjectId(id) },
+        { $set: modifyuser }
+      );
+      if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount) {
+        throw "could not update user successfully";
+      }
+      return true;
 },
 
 async delete(id)
@@ -47,7 +77,7 @@ async delete(id)
 
 async check(email,password){
     const userCollection=await users();
-    const user=await this.get(email)
+    const user=await this.getByEmail(email)
     if(user.password==password) return true
     else return false
 }

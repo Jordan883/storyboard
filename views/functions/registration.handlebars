@@ -15,6 +15,11 @@
     
 
     <div id="parentemail">
+        <h1>Do you already have a parent account? If yes, type your email.</h1>
+        <input type="text" id='parentemail' name='parentemail'/>
+        {{#if error}}
+	    <p >{{error}}</p>
+	    {{/if}}
     </div>
 
     <h1>Email</h1>
