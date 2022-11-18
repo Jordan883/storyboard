@@ -7,7 +7,7 @@ const getCollectionFn = (collection) => {
 
   return async () => {
     if (!_col) {
-      const db = await dbConnection.dbConnection();
+      const db = await dbConnection.connectToDb();
       _col = await db.collection(collection);
     }
 
