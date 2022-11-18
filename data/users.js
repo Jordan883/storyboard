@@ -25,16 +25,7 @@ async create(type,email,username,password){
     const user = await this.get(x);
     return user;
 },
-
-async getUserById(id) {
-    func.checkId(id);
-    const userCollection = await users();
-    const user = await userCollection.findOne({ _id: ObjectId(id) });
-    if (user === null) throw "No user with that id";
-    user._id = user._id.toString();
-    return user;
-  },
-    
+   
 async get(id){
     const userCollection=await users()
     const user = await userCollection.findOne({ _id: checkid(id) });
