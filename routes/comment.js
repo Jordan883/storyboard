@@ -5,7 +5,7 @@ const func = require('../data/functions');
 var xss = require("xss");
 
 router
-  
+  .route('/articles/comments')
   .get(async (req, res) => {
   try {
     const comments = await data.getAllComments();
