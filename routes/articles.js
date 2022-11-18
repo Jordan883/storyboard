@@ -22,7 +22,7 @@ router
           currentUsername: currentUsername,
           userId: element.userId,
           username: name,
-          comment: element.parkComment,
+          comment: element.articleComment,
           timestamp: element.timestamp,
           commentId: element._id,
         };
@@ -43,7 +43,7 @@ router
           throw "Please provide all the input for createComment!";
         const infonewCommentTxt = xss(info.newCommentTxt);
         const comment = await commentdata.createComment(
-          parkId,
+          articleId,
           userInfo.userId,
           infonewCommentTxt
         );
