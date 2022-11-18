@@ -14,6 +14,13 @@ const config = {
   issuerBaseURL: 'https://dev-kn-xijmw.us.auth0.com'
 };
 
+
+//引入multer
+const multer = require('multer')
+////引入 path 和 fs
+//const path = require('path')
+//const fs = require('fs')
+
 const handlebarsInstance = exphbs.create({
   defaultLayout: 'main',
   // Specify helpers which are only registered on this instance.
@@ -32,6 +39,14 @@ const app = express();
 
 app.engine('handlebars', handlebarsInstance.engine);
 app.set('view engine', 'handlebars');
+
+//引入 path 和 fs
+//const path = require('path')
+//const fs = require('fs')
+//const upload = multer({dest: './images'})
+
+//使用中间件，没有挂载路径，应用的每个请求都会执行该中间件。any表示接受一切，具体参考文档。
+//app.use(upload.any())
 
 app.use('/public', static);
 app.use(express.json());

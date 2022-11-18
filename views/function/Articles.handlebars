@@ -5,21 +5,30 @@
 </header>
 
 <div >
-    <form action="/articles/newArticle" method="POST" id="login-form">
+    <form action="/articles/newArticle" method="POST" enctype="multipart/form-data">
         <div class="date">
             <p>Title:</p>
             <input type="text" id="title" name="title"/> 
 
             <p>Content:</p>
             <textarea type="text" id="content" name="content" style="width:500px; height:400px;">
-            </textarea>    
+            </textarea>
         </div>
-
+        <input type="file" accept="image/*" name="file1">
         <div>
             <button type="submit" class="button">Post</button>
         </div>
 
     </form>
+
+    <!--
+    <form action="/articles/postImage" method="post" enctype="multipart/form-data">
+		chose image:
+		<input type="file" name="image"><br>
+		<input type="submit" value="upload">
+    </form>
+    -->
+
     {{#if error}}
 	    <p >{{error}}</p>
 	  {{/if}}

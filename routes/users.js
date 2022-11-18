@@ -16,6 +16,7 @@ router.get("/login", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    console.log('now we get routes->users.js')
     var body = req.body;
     if (!body.email || !body.password)
       throw "Please provide all input for login!";
@@ -25,6 +26,7 @@ router.post("/login", async (req, res) => {
     if (!password) throw "must provide password";
 
     let userInfo = await userData.checkUser(email, password);
+
     if (userInfo) {
       var user = {
         name: userInfo.firstname + " " + userInfo.lastname,
@@ -79,25 +81,25 @@ router.get("/profile", async (req, res) => {
       let park;
       let activity;
       let date;
-      let appointment;
-      let appointments = [];
-      for (let i = 0; i < user.appointments.length; i++) {
-        appointment = await appointmentData.getAppointmentById(
-          user.appointments[i].toString()
-        );
-        park = await parkData.getParkById(appointment.parkId.toString());
-        activity = await activityData.get(appointment.activityId.toString());
-        date =
-          appointment.month + "/" + appointment.day + "/" + appointment.year;
-        appointmentinfo = {
-          park: park.name,
-          activity: activity.name,
-          date: date,
-          time: appointment.hour,
-          status: appointment.status,
-        };
-        appointments.push(appointmentinfo);
-      }
+//      let appointment;
+//      let appointments = [];
+//      for (let i = 0; i < user.appointments.length; i++) {
+//        appointment = await appointmentData.getAppointmentById(
+//          user.appointments[i].toString()
+//        );
+//        park = await parkData.getParkById(appointment.parkId.toString());
+//        activity = await activityData.get(appointment.activityId.toString());
+//        date =
+//          appointment.month + "/" + appointment.day + "/" + appointment.year;
+//        appointmentinfo = {
+//          park: park.name,
+//          activity: activity.name,
+//          date: date,
+//          time: appointment.hour,
+//          status: appointment.status,
+//        };
+//        appointments.push(appointmentinfo);
+//      }
       let userinfo = {
         id: user._id.toString(),
         firstname: user.firstname,
@@ -109,7 +111,7 @@ router.get("/profile", async (req, res) => {
         age: user.age,
         description: user.description,
         favorites: user.favorites,
-        appointments: appointments,
+//        appointments: appointments,
       };
       res
         .status(200)

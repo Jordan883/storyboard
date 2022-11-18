@@ -1,22 +1,14 @@
 {
-  "name": "storyboard",
+  "name": "cs546-project",
   "version": "1.0.0",
-  "description": "A story-writing app where kids can share their writing and parents can moderate content. Project for CS-555. ",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "jest",
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jordan883/storyboard.git"
-  },
-  "author": "Chun Chen, Jordan Fernandes, Kaijie Ma, Siyan Liu, Wenjing Zhou, Yifan Zhang",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Jordan883/storyboard/issues"
-  },
-  "homepage": "https://github.com/Jordan883/storyboard#readme",
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
