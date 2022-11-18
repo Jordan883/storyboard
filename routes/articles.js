@@ -36,7 +36,13 @@ router.post("/newArticle", requiresAuth(), async (req, res) => {
       // get input
       const title = xss(body.title);
       const content = xss(body.content);
-      const image = xss(body.image)
+      const image = xss(body.image);
+
+      const extname = path.extname(req.files[0].originalname);
+
+      const newPath = './images/' + title + extname;
+      fs.rename(req.files[0].path, newPath, function(err){
+      })
 
       //拿到后缀名
 	var extname = path.extname(req.files[0].originalname);
