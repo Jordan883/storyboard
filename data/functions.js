@@ -32,33 +32,18 @@ function checkPassword(string) {
     throw "not a string";
   }
 }
-function computeRating(park) {
-  let rating = 0;
-  let num = park.comments.length;
-  if (num === 0) {
-    return rating;
-  }
-  for (let a of park.comments) {
-    rating += a.rating;
-  }
-  return Math.floor((rating / num) * 100) / 100;
-}
+
 function checkId(string) {
   return ObjectId.isValid(string);
 }
-function checkRating(val) {
-  if (typeof val !== "number")
-    return false;
-  if (isNaN(val))
-    return false;
-  return !(val < 0 || val > 5);
-}
+
 function checkNumber(val) {
   if (typeof val !== "number")
     return false;
   if (isNaN(val))
     return false;
 }
+
 function checkString(string) {
   if (!string)
     return false;
@@ -70,13 +55,12 @@ function checkString(string) {
   }
   return true;
 }
+
 module.exports = {
   checkUserName,
   checkEmail,
   checkPassword,
-  computeRating,
   checkId,
-  checkRating,
   checkString,
   checkNumber
 }
