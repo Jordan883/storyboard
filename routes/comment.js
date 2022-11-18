@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data/comment');
-const func = require('../data/function');
+const func = require('../data/functions');
 var xss = require("xss");
 
 router
