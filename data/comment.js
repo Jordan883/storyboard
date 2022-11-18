@@ -1,4 +1,4 @@
-const func = require('./function');
+const func = require('./functions');
 const mongoCollections = require('../config/mongoCollections');
 const articles = mongoCollections.articles;
 const userdata = require("./users");
