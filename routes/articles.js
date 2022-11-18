@@ -3,8 +3,9 @@ const router = express.Router();
 const data = require("../data/articles");
 const userdata = require("../data/users");
 const { requiresAuth } = require('express-openid-connect');
+const multer = require('multer')
+
 var xss = require("xss");
-//引入 path 和 fs
 const path = require('path')
 const fs = require('fs')
 const upload = multer({dest: './images/'})
