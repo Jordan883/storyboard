@@ -1,4 +1,4 @@
-# storyboard
+# CS-555-Project
 
 [![.github/workflows/node.js.yml](https://github.com/Jordan883/storyboard/actions/workflows/node.js.yml/badge.svg)](https://github.com/Jordan883/storyboard/actions/workflows/node.js.yml)
 
