@@ -26,6 +26,7 @@ module.exports = {
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw 'Could not add a comment';   
+    return newComment;
   },
  async removeComment(commentId) {
     if (!commentId) throw 'please provide comment id';   
@@ -39,7 +40,7 @@ module.exports = {
       { $pull: { comments: { _id: ObjectId(commentId) } } }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw 'Could not remove that comment';    
+      throw 'Could not remove this comment';    
     return true;
   },    
   async getAllComments(articleId) {
