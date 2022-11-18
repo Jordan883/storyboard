@@ -1,0 +1,823 @@
+.appointment_list{
+  font-size:1.5em;
+	padding:0.5em 0 0;
+  color:#0b17f3
+	/* text-transform:uppercase; */
+}
+
+.warning{
+  font-size:1.5em;
+	padding:0.5em 0 0;
+  color: red
+}
+
+*{
+	/* Universal reset: */
+	margin:0;
+	padding:0;
+}
+
+header{
+  text-align: center;
+}
+
+/* Article styles: */
+article{
+	margin:3em 0;
+	padding:20px;
+	text-shadow:0 0.5px 0 #f08080;
+}
+
+figure{
+	border:3px solid #142830;
+	float:right;
+	height:300px;
+	margin-left:15px;
+	overflow:hidden;
+	width:500px;
+}
+
+figure:hover{
+	-moz-box-shadow:0 0 2px #4D7788;
+	-webkit-box-shadow:0 0 2px #4D7788;
+	box-shadow:0 0 2px #4D7788;
+}
+
+figure img{
+	margin-left:-60px;
+}
+
+body{
+	/* Setting the default text color, size, page background and a font stack: */
+	text-align: center;
+  font-size:0.825em;
+	color:#000000;
+	background-color:	#e0ffff;
+  /* background-color: 	#f5f5dc; */
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Hyperlink Styles: */
+a:link{
+  text-decoration:none;
+}
+a:hover{
+  text-decoration:none;
+}
+a:visited {
+	text-decoration:none;
+}
+
+
+/* Headings: */
+h1,h2,h3,h4{
+	font-family:"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+	text-shadow:0 1px 1px black;
+}
+
+h1{
+	/* The logo text */
+	font-size:3.5em;
+	padding:0.5em 0 0;
+  color:#000000; 
+	text-transform:uppercase;
+}
+
+h3,h4{
+	/* The slogan text */
+	font-family:forte,"Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+	font-size:2em;
+	font-weight:normal;
+	margin:0 0 1em;
+}
+
+
+h2{
+	font-size:2.2em;
+	font-weight:normal;
+	letter-spacing:0.01em;
+	text-transform:uppercase;
+}
+
+p{
+	line-height:2em;
+	padding-bottom:1em;
+  font-weight:bold;
+  color:#0b17f3
+}
+
+
+
+hr{
+  margin: 20px 0 20px 0; 
+  background-color: #a2a2a2;
+  border:none;
+  height: 2px;
+}
+input, textarea{
+  font-family:Arial, Helvetica, sans-serif;
+}
+/* For ALL list */
+ul li{
+  list-style: none;
+}
+
+/* For login  and signup*/
+.loginDiv{
+  margin: 10% 10% 20% 10%;
+}
+.login label{
+  margin-left: -10%;
+  font-size:1.2em;
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+}
+.login input{
+  width: 50%;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
+}
+.signupDiv{
+  margin: 10% 10% 20% 10%;
+}
+.signup label{
+  margin-left: -10%;
+  font-size:1.2em;
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+}
+.signup input{
+  width: 50%;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
+}
+
+/* For home search list */
+.homeSearchDiv{
+  margin: 0 auto;
+  width: 1000px;
+  height: 1000px;
+}
+.homeSearchImg{
+  float: left;
+  width: 50%;
+}
+.homeSearchImgList li{
+  width: 500px;
+  height: 300px;
+  padding: 20px 0;
+}
+.homeSearchImgList li img{
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+.homeSearchTxt{
+  margin-left: 50%;
+  width: 50%;
+}
+.homeSearchTxtList li{
+  width: 700px;
+  height: 300px;
+  padding: 20px 20px;
+}
+.homeSearchTxtListItem{
+  padding: 40px 0;
+}
+.homeSearchTxtList li div a p {
+	color: 	#000000;
+  text-align: left;
+}
+.homeSearchTxtList li div a p:hover {
+	color: #4CAF50;
+}
+
+/* For Act Search list */
+.actSearchDiv{
+  margin: 0 auto;
+  width: 500px;
+}
+.actSearchTxtList li{
+  width: 500px;
+  height: 300px;
+  padding: 20px 0;
+}
+.actSearchTxtListItem{
+  padding: 40px 0;
+}
+.actSearchImgListItem img{
+  width: 500px;
+  height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+  float: center;
+}
+.actSearchTxtList li div a p {
+	color: #000000;
+  text-align: left;
+}
+.actSearchTxtList li div a p:hover {
+	color: #4CAF50;
+}
+
+/* For Recommendation List */
+.homeLink{
+  margin: 0 auto;
+  width: 500px;
+}
+.homeRecommendationLink{
+  float: left;
+  width: 50%;
+  font-size:1.5em;
+  color:#ff7f50;
+  border-radius: 20px;
+  padding: 10px 0 10px 0;
+}
+.homeRecommendationLink:hover{
+  color: #e0ffff;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+.homePopularLink{
+  margin-left: 55%;
+  width: 45%;
+  font-size:1.5em;
+  color:#ff7f50; 
+  border-radius: 20px;
+  padding: 10px 0 10px 0;
+}
+.homePopularLink:hover{
+  color: #e0ffff;
+  background-color: #4CAF50;
+  cursor: pointer;
+}
+.homeRecommendationDiv{
+  margin: 0 auto;
+  width: 1000px;
+  height: 1000px;
+}
+.homeRecommendationImg{
+  float: left;
+  width: 50%;
+}
+.homeRecommendationImgList li{
+  width: 500px;
+  height: 300px;
+  padding: 20px 0;
+}
+.homeRecommendationImgList li img{
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+.homeRecommendationTxt{
+  margin-left: 50%;
+  width: 50%;
+}
+.homeRecommendationTxtList li{
+  width: 700px;
+  height: 300px;
+  padding: 20px 20px;
+}
+.homeRecommendationTxtListItem{
+  padding: 40px 0;
+}
+.homeRecommendationTxtList li div a p {
+	color: #000000;
+  text-align: left;
+}
+.homeRecommendationTxtList li div a p:hover {
+	color: #4CAF50;
+}
+
+/* For Popular List */
+.homePopularDiv{
+  margin: 0 auto;
+  width: 1000px;
+  height: 1000px;
+}
+.homePopularImg{
+  float: left;
+  width: 50%;
+}
+.homePopularImgList li{
+  width: 500px;
+  height: 300px;
+  padding: 20px 0;
+}
+.homePopularImgList li img{
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+.homePopularTxt{
+  margin-left: 50%;
+  width: 50%;
+}
+.homePopularTxtList li{
+  width: 700px;
+  height: 300px;
+  padding: 20px 20px;
+}
+.homePopularTxtListItem{
+  padding: 40px 0;
+}
+.homePopularTxtList li div a p {
+	color: #000000;
+  text-align: left;
+}
+.homePopularTxtList li div a p:hover {
+	color: #4CAF50;
+}
+.star-rating-num{
+  text-align: left;
+  color: #4CAF50;
+}
+.star-rating {
+  unicode-bidi: bidi-override;
+  color: #ddd;
+  font-size: 0;
+  height: 25px;
+  position: relative;
+  display: table;
+  padding: 0 0 12px 0;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+
+.star-rating span {
+  padding: 2px;
+  font-size: 20px;
+}
+
+.star-rating-top {
+  color: #FFD700;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.star-rating-bottom {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+/* The form styling */
+.textInput {
+  width: 16.5%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.search{
+  width: 50%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: none;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: #ccc;
+  font-size: 16px;
+  -webkit-transition: width 0.4s ease-in-out;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  transition: width 0.4s ease-in-out;
+}
+
+.search:focus {
+  border-color: #6495ed;
+}
+
+/* The button styling */
+.button {
+  display: inline-block;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 12px 20px;
+  width: 125px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 20px 0;
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+/* The navigation styling: */
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #f3f3f3;
+    box-shadow: 0 0 5px #ccc;
+    -webkit-box-shadow: 0 0 5px #ccc;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: #100;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {
+   color: #4CAF50;
+}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px){
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
+
+
+/* For User Profile Page */
+.userProfileTitle h1{
+  padding: 5% 0 5% 0;
+}
+.userProfileTitle h2{
+  padding: 0% 0 2px 0;
+}
+
+.userProfile{
+  margin: auto;
+  width: 320px;
+  height: 800px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+}
+.userProfile h1{
+  padding-bottom: 50px;
+}
+.userProfile form p{
+  padding: 5px 0 0 2px;
+  text-align: left;
+}
+.userProfile form input{
+  border-radius: 5px;
+  padding: 5px 5px 5px 10px;
+  margin: 0 0 10px 0;
+  width: 300px;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
+}
+
+/*Single park page*/
+.parkImg {
+  margin: 50px 0 50px 0;
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  object-fit: cover
+}
+
+.parkCard {
+  width: 1000px;
+  padding: 20px;
+  overflow: hidden;
+}
+.parkCard .parkCardImg {
+  margin-right: 15px;
+  float: left;
+  width: 50%;
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  object-fit: cover
+}
+.parkCard .parkCardText {
+  margin-left: 50%;
+  display: block;
+  margin: 2px 0 0 0;
+  text-align: left;
+  line-height: 2em;
+  padding-bottom: 1em;
+  font-weight: bold;
+  display: table;
+  color: #000000;
+}
+.parkCard h2 {
+  color: #000000;
+  font-size: 1.5em;
+  margin-bottom: 1px;
+}
+.parkCard p {
+  font-size: 1em;
+  margin-bottom: 0;
+}
+
+.activitiesRight {
+  margin: 2px 0 0 0;
+  display: table-cell;
+}
+
+.ActListDiv{
+  margin: 5% 10% 10% 10%;
+}
+.ActList{
+  border-radius: 20px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 5px #ccc;
+}
+.ActListContent {
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block;
+}
+.ActListContent h2{
+  width: 100%;
+}
+.ActListLeft{
+  margin-top: 30px;
+  width: 49%;
+  text-align: left;
+  float: left;
+}
+.ActListRight{
+  margin-top: 30px;
+  width: 50%;
+  text-align: left;
+  margin-left: 50%;
+  border-left: 1px #eee solid;
+  padding-left: 20px;
+}
+
+/* For single park */
+.singlePark{
+  margin: 0 auto;
+  width: 500px;
+}
+.singlePark img{
+  float: center;
+}
+.parkInfo{
+  width: 500px;
+  text-align: left;
+}
+.newComment{
+  margin: 0 auto;
+  width: 500px;
+}
+.commentUser{
+  width: 100%;
+}
+.commentUsername{
+  text-align: left;
+}
+.commentContent{
+  width: 100%;
+}
+.commentContent p img{
+  width: 20px;
+  vertical-align: middle;
+  margin: 0 5px 5px 5px;
+  cursor: pointer;
+}
+
+.rating {
+      font-size: 0;
+      display: table;
+  }
+
+  .rating > label {
+      color: #ddd;
+      float: right;
+  }
+
+  .rating > label:before {
+      padding: 3px;
+      font-size: 24px;
+      line-height: 1em;
+      display: inline-block;
+      content: "★";
+  }
+
+  .rating > input:checked ~ label,
+  .rating:not(:checked) > label:hover,
+  .rating:not(:checked) > label:hover ~ label {
+      color: #FFD700;
+  }
+
+  .rating > input:checked ~ label:hover,
+  .rating > label:hover ~ input:checked ~ label,
+  .rating > input:checked ~ label:hover ~ label {
+      opacity: 0.5;
+  }
+
+
+.userComment{
+  font-size: 16px;
+  font-family:Arial, Helvetica, sans-serif;
+}
+.timestamp{
+  color: #a9a9a9;
+}
+.commentContentTxt{
+  width: 100%;
+}
+
+.commentContentTxt textarea{
+  width: 70%;
+  height: 50px;
+  resize: none;
+  padding: 5px 5px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 2px solid #a2a2a2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: left;
+}
+.commentContentBtn{
+  width: 100%;
+}
+.commentButton{
+  display: inline-block;
+  background: transparent;
+  border-color: #6495ed;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  color: #100;
+  padding: 5px 8px;
+  cursor:pointer; 
+}
+.commentButton:hover{
+  background-color: #6495ed;
+  color: #fff;
+}
+.Replycomment{
+  width: 90%;
+  margin-left: 10%;
+}
+/*  For comment reply form */
+
+.newReplyComment{
+  width: 90%;
+  margin-left: 10%;
+}
+.replyCommentUser{
+  width: 100%;
+}
+.replyCommentUsername{
+  text-align: left;
+}
+.replyCommentContent{
+  width: 100%;
+}
+.replyCommentContentTxt{
+  width: 100%;
+}
+.replyCommentContentTxt input{
+  width: 40%;
+  padding: 5px 5px;
+  display: inline-block;
+  border: 2px solid #a2a2a2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.replyCommentContentTxt textarea{
+  width: 70%;
+  height: 50px;
+  resize: none;
+  padding: 5px 5px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 2px solid #a2a2a2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: left;
+}
+.replyCommentContentBtn{
+  width: 100%;
+}
+.replyCommentButton{
+  display: inline-block;
+  background: transparent;
+  border-color: #6495ed;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  color: #000000;
+  padding: 5px 8px;
+  cursor:pointer; 
+}
+.replyCommentButton:hover{
+  background-color: #6495ed;
+  color: #fff;
+}
+
+.replyButton{
+  display: inline-block;
+  color:#a9a9a9;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  padding: 2px 5px;
+  cursor:pointer; 
+}
+.replyButton:hover{
+  background-color: #6495ed;
+  color: #fff;
+}
+/* For single activity page */
+.singleActInfo{
+  margin: 5% 20% 5% 20%;
+}
+.singleActInfo h2{
+  padding-top: 10%;
+}
+.singleActInfo h3{
+  padding-top: 5%;
+}
+
+.createReview{
+  width: 100%;
+}
+.reviewContent textarea{
+  width: 70%;
+  height: 50px;
+  resize: none;
+  padding: 5px 5px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 2px solid #a2a2a2;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: left;
+}
+.reviewContentButton{
+  width: 100%;
+  margin-left: 15%;
+  text-align: left;
+}
+.reviewContentBtn{
+  display: inline-block;
+  background: transparent;
+  border-color: #6495ed;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  color: #100;
+  padding: 5px 8px;
+  cursor:pointer; 
+}
+.reviewContentBtn:hover{
+  background-color: #6495ed;
+  color: #fff;
+}

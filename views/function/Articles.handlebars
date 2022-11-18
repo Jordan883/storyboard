@@ -1,0 +1,22 @@
+<header>
+    <h1>
+        CREATE A NEW ARTICLE
+    </h1>
+</header>
+<div >
+    <form action="/articles/newArticle" method="POST" enctype="multipart/form-data">
+        <div class="date">
+            <p>Title:</p>
+            <input type="text" id="title" name="title"/> 
+            <p>Content:</p>
+            <textarea type="text" id="content" name="content" style="width:800px; height:400px;"></textarea>
+        </div>
+        <input type="file" accept="image/*" name="file1" buttonText="Your label here.">
+        <div>
+            <button type="submit" class="button">Post</button>
+        </div>
+    </form>
+    {{#if error}}
+	    <p >{{error}}</p>
+	  {{/if}}
+</div>

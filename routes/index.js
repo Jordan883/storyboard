@@ -1,12 +1,22 @@
 const authRoutes = require('./auth');
 const usersRoutes = require('./users');
+const homeRoutes = require("./home");
+const aboutRoutes = require("./about");
+const articlesRoutes = require("./articles");
+
+var xss = require("xss");
+
+console.log('now we get routes->index.js')
 
 const constructorMethod = (app) => {
   app.use('/auth', authRoutes);
   app.use('/users', usersRoutes);
+  app.use("/", homeRoutes);
+  app.use("/about",aboutRoutes);
+  app.use("/articles", articlesRoutes)
 
-  app.use('*', (req, res) => {
-    res.sendStatus(404);
+  app.all("*", (req, res) => {
+    res.status(404).json("Error 404: ");
   });
 };
 
