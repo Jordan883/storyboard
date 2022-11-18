@@ -48,7 +48,7 @@ module.exports = {
     
     const articlecollection = await articles();
     const articlelist = await articlecollection.find({ _id: ObjectId(articleId) }, { projection: { comments: 1 } }).toArray();
-    if (!articlelist || articlelist === null) gthrow 'no article with that id';
+    if (!articlelist || articlelist === null) throw 'no article with that id';
     return articlelist;
   },  
 }
