@@ -55,7 +55,7 @@ module.exports = {
       }
     }
     if (userId === null) throw "could not find that user with that comment";
-    const user = await userdata.getUserById(userId);
+    const user = await userdata.get(userId);
     return user;
   }
 }
