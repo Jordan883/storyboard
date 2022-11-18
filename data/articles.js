@@ -48,6 +48,15 @@ async create(title,author,content){
     return article;
 },
 
+ async getUserById(id) {
+    func.checkId(id);    
+    const userCollection = await users();
+    const user = await userCollection.findOne({ _id: ObjectId(id) });
+    if (user === null) throw "No user with that id";
+    user._id = user._id.toString();
+    return user;
+  },   
+    
 async get(id){
     const articleCollection=await articles()
     const article = await articleCollection.findOne({ _id: checkid(id) });
