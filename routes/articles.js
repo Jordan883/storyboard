@@ -44,16 +44,6 @@ router.post("/newArticle", requiresAuth(), async (req, res) => {
       fs.rename(req.files[0].path, newPath, function(err){
       })
 
-      //拿到后缀名
-	var extname = path.extname(req.files[0].originalname);
-
-	//拼接新的文件路径，文件加上后缀名
-	var newPath = './images/' + title + extname;
-    console.log(req.files[0],'<<<<', newPath)
-	//重命名
-	fs.rename(req.files[0].path, newPath, function(err){
-	})
-
       // get article infos
       const Article = await data.createArticle(
         // user.firstname.toString(),
