@@ -12,7 +12,7 @@ router
       var currentUsername = req.session.user.name;
     else currentUsername = null;
     try {
-      const park = await data.get(req.params.id);
+      const article = await data.get(req.params.id);
       const comments = article.comments;
       var userList = [];
       for (const element of comments) {
