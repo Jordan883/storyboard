@@ -7,43 +7,70 @@ const familiesData=require('../data/families')
 router.get("/profile", async (req, res) => {
   if(req.oidc.isAuthenticated()){
   try {
-    if(!ObjectId.isValid(req.params.id)) return res.status(400).json({error:"id is false"});
-    let user = await userData.get(req.params.id);
-    res.status(200).json(user);
+    let user = await userData.getByEmail(req.oidc.user.email);
+    const family=await familiesData.getFamilyById(user.family) 
+    let parents=[];
+    let children=[];
+    let parent,child;
+    for(let i=0;i<family.parents.length;i++)
+    {
+      parent = await userData.get(family.parents[i])
+      parents.push(parent)
+    }
+    for(let i=0;i<family.children.length;i++)
+    {
+      child = await userData.get(family.children[i])
+      children.push(child)
+    }
+    res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:false });
   } catch (e) {
-    res.status(404).json({ error: 'user not found' });
+    res.status(400).json({ error: e });
   }
 }else{
   res.status(200).redirect('/login')
 }
 });
 
-
-router.delete('/', async (req, res) => {
+router.post("/profile", async (req, res) => {
   if(req.oidc.isAuthenticated()){
-  if(!ObjectId.isValid(req.params.id)) return res.status(400).json({error:"id is false"});
-  try {
-    await userData.get(req.params.id);
-  } catch (e) {
-    res.status(404).json({ error: 'user not found' });
-    return;
+    try{
+      
+      if(Object.keys(req.body).length >0){
+        const username=req.body.username
+        const name=req.body.name
+        let user=await userData.getByEmail(req.oidc.user.email)
+        await userData.updateUser(user._id.toString(),user.type,user.email,name,username,user.family,user.content_restrict)
+        res.status(200).redirect('/users/profile')
+      }else{
+        let user = await userData.getByEmail(req.oidc.user.email);
+        const family=await familiesData.getFamilyById(user.family) 
+        let parents=[];
+        let children=[];
+        let parent,child;
+        for(let i=0;i<family.parents.length;i++)
+        {
+          parent = await userData.get(family.parents[i])
+          parents.push(parent)
+        }
+        for(let i=0;i<family.children.length;i++)
+        {
+          child = await userData.get(family.children[i])
+          children.push(child)
+        }
+        res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:true });
+      }
+    }catch(e){
+      res.status(400).json({error:e})
+    }
   }
+  else res.status(200).redirect('/login')
+})
 
-  try {
-    await userData.delete(req.params.id);
-    res.status(200).json({"userId": `${req.params.id}`, "deleted": true});
-  } catch (e) {
-    res.status(500).json({ error: e });
-  }
-}else{
-  res.status(200).redirect('/login')
-}
-});
 
 router.get("/register", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     try {
-      res.status(200).render("functions/registration");
+      res.status(200).render("functions/registration",{ user: req.oidc.user});
     } catch (e) {
       res.status(500)
     }
@@ -57,10 +84,10 @@ router.post("/register", async (req, res) => {
     try {
       const type=req.body.type
       const username=req.body.username
-      const email=req.body.email
-      const password=req.body.password
       const name=req.body.name
-      let user=await userData.create(type,email,username,name,password)
+      const email = req.oidc.user.email
+
+      let user=await userData.create(type,email,username,name)
       let family;
       if(type=="Parent"){
         if(!req.body.parentemail) family=await familiesData.createFamily([user._id])

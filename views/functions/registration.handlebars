@@ -1,6 +1,5 @@
 <div class="userProfileTitle">
-    <h1>Welcome!!!</h1>
-    <h2>Your Public Profile</h2>
+    <h1>Please complete personal information</h1>
 </div>
 
 
@@ -21,19 +20,12 @@
 	    <p >{{error}}</p>
 	    {{/if}}
     </div>
-
     <h1>Email</h1>
-    <input type="text" id='email' name='email'/>
+    <input type="text" id='username' name='username' value='{{user.email}}' disabled="disabled"/>
     <h1>Username</h1>
     <input type="text" id='username' name='username'/>
     <h1>Name</h1>
     <input type="text" id='name' name='name'/>
-    <h1>Password</h1>
-    <input type="text" id='password' name='password'/>
-
-
-
-
 
     <button type="submit" class="button">Submit</button>
     </form>

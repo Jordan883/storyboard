@@ -1,0 +1,86 @@
+  <div class="userProfileTitle">
+    <h1>Welcome!!! {{user.username}} </h1>
+    <h2>Your Public Profile</h2>
+    
+  </div>
+  <div class = "userProfile">
+    <form action="/users/profile" method="POST" id="profileform">
+      {{#if edit}}
+      <p> Name </p>
+      <input type="text" id="name" name="name" value="{{user.name}}" />
+      <p> Username </p>
+      <input type="text" id="username" name="username" value="{{user.username}}" />
+      <p> Email Address </p>
+      <input type="text" id="email" name="email" value="{{user.email}}" disabled="disabled"/>
+      <p>Family</p>
+      <div>
+        <h2>Parents</h2>
+        {{#each parents}}
+        <p>Name:</p>
+        {{this.name}}
+        <p>Email:</p>
+        {{this.email}}
+        {{/each}}
+      </div>
+      <div>
+        <h2>Children</h2>
+        {{#if children}}
+        {{#each children}}
+        <p>Name:</p>
+        {{this.name}}
+        <p>Email:</p>
+        {{this.email}}
+        {{/each}}
+        {{else}}
+        <p>None</p>
+        {{/if}}
+
+      </div>
+      <div class="userProfileButton">
+        <button type="submit" class="button" ><span>Submit</span> </button>
+      </div>
+      {{else}}
+      <p> Name </p>
+      <p>{{user.name}}<p>
+      <p> Username </p>
+      <p>{{user.username}}</p>
+      <p> Email Address </p>
+      <p>{{user.email}}</p>
+      <p>Family</p>
+      <div>
+        <h2>Parents</h2>
+        {{#each parents}}
+        <p>Name:</p>
+        {{this.name}}
+        <p>Email:</p>
+        {{this.email}}
+        {{/each}}
+      </div>
+      <div>
+        <h2>Children</h2>
+        {{#if children}}
+        {{#each children}}
+        <p>Name:</p>
+        {{this.name}}
+        <p>Email:</p>
+        {{this.email}}
+        {{/each}}
+        {{else}}
+        <p>None</p>
+        {{/if}}
+      </div>
+      <div class="userProfileButton">
+        <button type="submit" class="button"><span>Edit Profile</span> </button>
+      </div>
+      {{/if}}
+
+      <div>
+        <a href="/logout">Log out</a>
+      </div>
+    </form>
+  </div>
+  
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+      crossorigin="anonymous"></script>
