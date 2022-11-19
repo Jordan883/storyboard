@@ -36,27 +36,6 @@ module.exports = {
     const articlelist = await articlecollection.find({ _id: ObjectId(articleId) }, { projection: { comments: 1 } }).toArray();
     if (!articlelist || articlelist === null) throw 'no article with that id';
     return articlelist;
-  },
-  async getUserByCommentId(commentId) {
-    if (!commentId) throw 'please provide comment id';
-    if (!ObjectId.isValid(commentId)) throw 'invalid comment ID';
-
-    const articleCollection = await articles();
-    let article = await articleCollection.findOne(
-      { "comments._id": ObjectId(commentId) },
-      { projection: { comments: 1 } }
-    );
-    if (park === null) throw 'No comment with that id';
-    var userId = null;
-    for (const element of article.comments) {
-      if (element._id.toString() === commentId.toString()) {
-        userId = element.userId;
-        break;
-      }
-    }
-    if (userId === null) throw "could not find that user with that comment";
-    const user = await userdata.get(userId);
-    return user;
   }
 }
 
