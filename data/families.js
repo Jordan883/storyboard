@@ -34,7 +34,6 @@ const updateUserFamilies = async (userIds, value) => {
             user.email,
             user.name,
             user.username,
-            user.password,
             user.family,
             user.content_restrict
         );

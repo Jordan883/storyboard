@@ -1,0 +1,39 @@
+<div class="userProfileTitle">
+    <h1>Please complete personal information</h1>
+</div>
+
+
+
+<div id="userprofile">
+    <form action="/users/register" method="POST">
+    <h1>You are:</h1>
+    <select id="type" name="type">
+        <option value="Parent">Parent</option>
+        <option value="Child">Child</option>
+    </select>
+    
+
+    <div id="parentemail">
+        <h1>Do you already have a parent account? If yes, type your email.</h1>
+        <input type="text" id='parentemail' name='parentemail'/>
+        {{#if error}}
+	    <p >{{error}}</p>
+	    {{/if}}
+    </div>
+    <h1>Email</h1>
+    <input type="text" id='username' name='username' value='{{user.email}}' disabled="disabled"/>
+    <h1>Username</h1>
+    <input type="text" id='username' name='username'/>
+    <h1>Name</h1>
+    <input type="text" id='name' name='name'/>
+
+    <button type="submit" class="button">Submit</button>
+    </form>
+
+</div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+      crossorigin="anonymous"></script>
+<script src="/public/script.js"></script>
+

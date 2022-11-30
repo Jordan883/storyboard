@@ -36,7 +36,7 @@ router.post("/newArticle", requiresAuth(), async (req, res) => {
       // get input
       const title = xss(body.title);
       const content = xss(body.content);
-
+      
       let newPath = undefined;
       if (req.files[0]){
         const extname = path.extname(req.files[0].originalname);

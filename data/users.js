@@ -2,25 +2,25 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 let { ObjectId } = require('mongodb');
 
-function checkid (id) {
-    if (!ObjectId.isValid(id)) throw 'Error: User Object ID is not valid';
+function checkid(id)
+{
     let parsedId = ObjectId(id);
     return parsedId;
 }
-
 module.exports = {
-async create(type,email,username,name,password){
+async create(type,email,username,name){
     const userCollection = await users();
     let newuser = {
         type:type,
         email:email,
         username:username,
         name:name,
-        password:password,
         family:null,
         content_restrict:null
     };
 
+    const olduser = await userCollection.findOne({email:email})
+    if(olduser) throw 'the user already exist'
     const insertInfo = await userCollection.insertOne(newuser);
     if (insertInfo.insertedCount === 0) throw 'Could not add user';
     const newId = insertInfo.insertedId;
@@ -43,14 +43,13 @@ async getByEmail(email){
     return user
 },
 
-async updateUser(id,type,email,name,username,password,family,content_restrict){
+async updateUser(id,type,email,name,username,family,content_restrict){
     const userCollection = await users();
     let modifyuser = {
         type:type,
         email: email,
         username:username,
         name:name,
-        password:password,
         family:family,
         content_restrict:content_restrict
       };
@@ -76,11 +75,5 @@ async delete(id)
     return `${user.username} has been successfully deleted!`;
 },
 
-async check(email,password){
-    const userCollection=await users();
-    const user=await this.getByEmail(email)
-    if(user.password==password) return true
-    else return false
-}
 
 }

@@ -4,10 +4,6 @@ const homeRoutes = require("./home");
 const aboutRoutes = require("./about");
 const articlesRoutes = require("./articles");
 
-var xss = require("xss");
-
-console.log('now we get routes->index.js')
-
 const constructorMethod = (app) => {
   app.use('/auth', authRoutes);
   app.use('/users', usersRoutes);
