@@ -8,12 +8,13 @@ function checkid(id)
     return parsedId;
 }
 module.exports = {
-async create(type,email,username,name){
+async create(type,email,username,name,secret){
     const userCollection = await users();
     let newuser = {
         type:type,
         email:email,
         username:username,
+        secret:secret,
         name:name,
         family:null,
         content_restrict:null

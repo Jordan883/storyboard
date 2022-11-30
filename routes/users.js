@@ -1,5 +1,7 @@
 const { ObjectId } = require('mongodb');
 const express = require('express');
+const qrcode = require('qrcode');
+const speakeasy = require('speakeasy');
 const router = express.Router();
 const userData = require('../data/users')
 const familiesData=require('../data/families')
@@ -66,16 +68,21 @@ router.post("/profile", async (req, res) => {
   else res.status(200).redirect('/login')
 })
 
-
 router.get("/register", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     try {
-      res.status(200).render("functions/registration",{ user: req.oidc.user});
+      const secret = speakeasy.generateSecret();
+      const qrsecret = await qrcode.toDataURL(secret.otpauth_url);
+      const twofasetup = {
+        qrsecret: qrsecret,
+        secret: secret
+      }
+      res.status(200).render("functions/registration",{ user: req.oidc.user, twofa: twofasetup});
     } catch (e) {
       res.status(500)
     }
   } else {
-    res.status(500).redirect("/login");
+    res.redirect("/login");
   }
 });
 
@@ -87,7 +94,14 @@ router.post("/register", async (req, res) => {
       const name=req.body.name
       const email = req.oidc.user.email
 
-      let user=await userData.create(type,email,username,name)
+      const base32secret = req.body.base32;
+      const userToken = req.body.token;
+      const verified = speakeasy.totp.verify({ secret: base32secret, encoding: 'base32', token: userToken });
+      if (!verified) {
+        // TODO: Throw error
+      }
+
+      let user=await userData.create(type,email,username,name,base32secret);
       let family;
       if(type=="Parent"){
         if(!req.body.parentemail) family=await familiesData.createFamily([user._id])
@@ -120,4 +134,40 @@ router.post("/register", async (req, res) => {
     res.status(400).redirect("/users/login");
   }
 });
+
+router.get('/twofa', async (req, res) => {
+  if (req.oidc.isAuthenticated()) {
+    try {
+      res.status(200).render("functions/twofalogin");
+    } catch (e) {
+      res.status(500)
+    }
+  } else {
+    res.redirect("/login");
+  }
+})
+
+router.post('/twofa', async (req, res) => {
+  if (req.oidc.isAuthenticated()) {
+    const user = await userData.getByEmail(req.oidc.user.email);
+    
+    const token = req.body.token;
+    const secret = user.secret;
+
+    const validated = speakeasy.totp.verify({
+      secret: secret,
+      encoding: 'base32',
+      token: token,
+    });
+
+    if (validated){
+      res.status(200).redirect('/')
+    } else {
+      // TODO: throw error
+    }
+  } else {
+    res.redirect("/login");
+  }
+})
+
 module.exports = router;

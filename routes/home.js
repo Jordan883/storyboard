@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const mongoCollections = require('../config/mongoCollections');
 const { requiresAuth } = require('express-openid-connect');
-const users = mongoCollections.users;
+const userData = require('../data').users;
 
 router.get('/', requiresAuth() , async (req, res) => {
-    const userCollection=await users()
-    const user = await userCollection.findOne({ email:req.oidc.user.email });
+    const user = await userData.getByEmail( req.oidc.user.email );
     if(user) res.status(200).render('home')
     else res.redirect('/users/register')
 })

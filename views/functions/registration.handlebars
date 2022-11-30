@@ -27,6 +27,13 @@
     <h1>Name</h1>
     <input type="text" id='name' name='name'/>
 
+    <h1>Two FA Setup</h1>
+    <h2>Use Google Authenticator to scan the below QR code. Then, input the key given to you by the app.</h2>
+    <img src="{{twofa.qrsecret}}">
+    <input type="text" id='token' name='token'/>
+
+    <input type="hidden" name="base32" value={{twofa.secret.base32}} />
+
     <button type="submit" class="button">Submit</button>
     </form>
 
