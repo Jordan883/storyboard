@@ -8,7 +8,6 @@ async function main(){
         "child",
         "123456@gmail.com",
         "abc",
-        "kk",
         "123456abc"
     );
     await Connection.closeConnection();

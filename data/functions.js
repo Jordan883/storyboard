@@ -1,4 +1,5 @@
 // This file provides validator functions
+// Kept for now! in case we can use these over in helpers in the future :D
 const { ObjectId } = require('mongodb');
 
 function checkUserName(string) {
