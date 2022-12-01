@@ -8,7 +8,12 @@ router.get("/profile", async (req, res) => {
   if(req.oidc.isAuthenticated()){
   try {
     let user = await userData.getByEmail(req.oidc.user.email);
-    const family=await familiesData.getFamilyById(user.family) 
+    const family=await familiesData.getFamilyById(user.family)
+
+    // get user type add by cchen
+    var isParent = false
+    if (user.type == "Parent") { var isParent = true }
+
     let parents=[];
     let children=[];
     let parent,child;
@@ -22,7 +27,10 @@ router.get("/profile", async (req, res) => {
       child = await userData.get(family.children[i])
       children.push(child)
     }
-    res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:false });
+
+    const restrict_level = family.content_restrict
+
+    res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:false, restrict_level:restrict_level, isParent:isParent });
   } catch (e) {
     res.status(400).json({ error: e });
   }
@@ -34,15 +42,30 @@ router.get("/profile", async (req, res) => {
 router.post("/profile", async (req, res) => {
   if(req.oidc.isAuthenticated()){
     try{
-      
+
       if(Object.keys(req.body).length >0){
         const username=req.body.username
         const name=req.body.name
+        const content_restrict=req.body.content_restrict
         let user=await userData.getByEmail(req.oidc.user.email)
-        await userData.updateUser(user._id.toString(),user.type,user.email,name,username,user.family,user.content_restrict)
+
+        // get user type add by cchen
+        var isParent = false
+        if (user.type == "Parent") { var isParent = true }
+
+        await userData.updateUser(user._id.toString(),user.type,user.email,name,username,user.family)
+
+        // set restrict level
+        await familiesData.updateContentRestrict(user.family, content_restrict)
+
         res.status(200).redirect('/users/profile')
       }else{
         let user = await userData.getByEmail(req.oidc.user.email);
+
+        // get user type add by cchen
+        var isParent = false
+        if (user.type == "Parent") { var isParent = true }
+
         const family=await familiesData.getFamilyById(user.family) 
         let parents=[];
         let children=[];
@@ -57,7 +80,11 @@ router.post("/profile", async (req, res) => {
           child = await userData.get(family.children[i])
           children.push(child)
         }
-        res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:true });
+
+        // get restrict level
+        const restrict_level = family.content_restrict
+
+        res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:true, restrict_level:restrict_level, isParent:isParent });
       }
     }catch(e){
       res.status(400).json({error:e})

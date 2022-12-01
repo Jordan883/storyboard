@@ -7,7 +7,8 @@ const users = mongoCollections.users;
 router.get('/', requiresAuth() , async (req, res) => {
     const userCollection=await users()
     const user = await userCollection.findOne({ email:req.oidc.user.email });
-    if(user) res.status(200).render('home')
+
+    if(user) res.status(200).render('home',)
     else res.redirect('/users/register')
 })
 

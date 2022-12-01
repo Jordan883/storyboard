@@ -1,0 +1,68 @@
+    <h1>{{article.title}}</h1>
+    <h1 id="singleArticleId" hidden>{{article._id}}</h1>
+    <hr>
+    <div class="singleArticle">
+        <img src="{{article.image}}" onerror="this.src='https://blog.nscsports.org/wp-content/uploads/2014/10/default-img.gif'" alt="{{article.name}}" class="singleArticle">
+        {{#if isParent}}
+            <form action="/articles/viewEditHistory/{{article._id}}" method="get">
+            <div class="login">
+                <button type="submit" class="button">View History</button>
+            </div>
+            </form>
+        {{/if}}
+        {{#if isAuthor}}
+            <form action="/articles/editArticle/{{article._id}}" method="get">
+            <div class="login">
+                <button type="submit" class="button">Edit</button>
+            </div>
+            </form>
+            <form action="/articles/deleteArticle/{{article._id}}" method="get">
+            <div class="login">
+                <button type="submit" class="button">Delete</button>
+            </div>
+            </form>
+        {{/if}}
+        <div class="articleInfo">
+            <p>Author: {{article.poster}}</p>
+            <p>{{content}}</p>
+            <br/>
+            <hr>
+            <div class="newComment">
+                <div class="commentUser">
+                    <div class="commentUsername" id="commentUsername">
+                    </div>
+                </div>
+                <div class="commentContent">
+                    <div class="commentContentTxt">
+                        <form action="/id/comments/{{article._id}}" method="POST" id="newCommentForm">
+                            <input id={{article._id}} name="singleArticleId" hidden />
+                            <input type="text" id="newCommentRating" name="newCommentRating" placeholder="Leave a rate from 0 to 5" value="0" hidden />
+                            <div class="rating">
+                                <input type="radio" class="ratingNumber" id="star5" name="rating" value="5" hidden/>
+                                <label for="star5"></label>
+                                <input type="radio" class="ratingNumber" id="star4" name="rating" value="4" hidden/>
+                                <label for="star4"></label>
+                                <input type="radio" class="ratingNumber" id="star3" name="rating" value="3" hidden/>
+                                <label for="star3"></label>
+                                <input type="radio" class="ratingNumber" id="star2" name="rating" value="2" hidden/>
+                                <label for="star2"></label>
+                                <input type="radio" class="ratingNumber" id="star1" name="rating" value="1" hidden/>
+                                <label for="star1"></label>
+                            </div>
+                            <textarea id="newCommentTxt" name="newCommentTxt" placeholder="Leave a friendly comment!"></textarea>
+                        </form>
+
+                    </div>
+                    <div class="commentContentBtn">
+                      <button class="commentButton" id="commentButton"> Comment </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+      crossorigin="anonymous"></script>
+<script type="module" src="/public/ajaxComment.js"></script>

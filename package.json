@@ -24,7 +24,8 @@
     "express-openid-connect": "^2.9.0",
     "mongodb": "^4.10.0",
     "multer": "^1.4.5-lts.1",
-    "xss": "^1.0.14"
+    "xss": "^1.0.14",
+    "secret": "^1.2.0"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^4.1.3",

@@ -35,7 +35,7 @@ const updateUserFamilies = async (userIds, value) => {
             user.name,
             user.username,
             user.family,
-            user.content_restrict
+//            user.content_restrict
         );
     }
 }
@@ -62,7 +62,8 @@ const createFamily = async (
         children: [],
         articleWriteHistory: [],
         articleViewHistory: [],
-        commentHistory: []
+        commentHistory: [],
+        content_restrict:5
     }
 
     const familyColl = await families();
@@ -184,10 +185,20 @@ const removeFamily = async (id) => {
         // Maybe the first parent's first name? 
 }
 
+const updateContentRestrict = async (id, level) => {
+    const familyColl = await families();
+    const updateInfo = await familyColl.updateOne(
+    { _id: ObjectId(id) },
+    { $set: { content_restrict: parseInt(level) } }
+    );
+    return `Family has been successfully deleted!`;
+}
+
 module.exports = {
     createFamily,
     getAllFamilies,
     getFamilyById,
     updateFamily,
-    removeFamily
+    removeFamily,
+    updateContentRestrict
 }

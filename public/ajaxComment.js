@@ -6,9 +6,9 @@
 
 
 $("#commentButton").click(function () {
-  var parkId = $("#singleParkId").text();
+  var articleId = $("#singleArticleId").text();
   $.ajax({
-    url: "http://localhost:3000/parks/id/comments/" + parkId,
+    url: "http://localhost:3000/articles/id/comments/" + articleId,
     type: "post",
     dataType: "json",
     data: $("#newCommentForm").serialize(),
@@ -60,7 +60,7 @@ $('body').on('click', '.replyButton', function (event) {
 $("body").on("click", ".replyCommentButton", function (event) {
   var commentID = event.target.id;
   $.ajax({
-    url: "http://localhost:3000/parks/id/comments/reply/" + commentID,
+    url: "http://127.0.0.1:3000/articles/id/comments/reply/" + commentID,
     type: "post",
     dataType: "json",
     data: $("#newReplyCommentForm").serialize(),
@@ -95,14 +95,14 @@ $("body").on("click", ".dislikeButton", function (event) {
 })
 
 function loadComments() {
-  var parkId = $("#singleParkId").text();
+  var articleId = $("#singleArticleId").text();
   var commentsList = $("#commentsList");
   var username = $("#commentUsername");
   $.ajax({
-    url: "http://localhost:3000/parks/id/comments/" + parkId,
+    url: "http://localhost:3000/articles/id/comments/" + articleId,
     type: "get",
     dataType: "json",
-    data: $('#singleParkId').serialize(),
+    data: $('#singleArticleId').serialize(),
     success: function (userList) {
       // Dynamic update username
       username.empty();
