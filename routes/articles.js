@@ -147,16 +147,15 @@ router.get("/id/:id", requiresAuth(), async (req, res) => {
 router.get("/id/comments/:id", requiresAuth(), async (req, res) => {
     // get user info
     const email = req.oidc.user.email;
-    const userInfo = await userdata.getByEmail(email);
+    const loginUser = await userdata.getByEmail(email);
 
-    const currentUsername = userInfo.name;
+    const currentUsername = loginUser.name;
     try {
       const article = await data.get(req.params.id);
       const comments = article.comments;
       var userList = [];
       for (const element of comments) {
-//        const userInfo = await userdata.get(element.userId);
-        const userInfo = ""
+        const userInfo = await userdata.get(element.userId);
 //        const name = userInfo.firstname + " " + userInfo.lastname;
         const name = "dummy"
 //        var user = {
@@ -185,13 +184,14 @@ router.get("/id/comments/:id", requiresAuth(), async (req, res) => {
     }
   })
   .post(async (req, res) => {
-//    if (req.session.user) {
-    if (True) {
+    const email = req.oidc.user.email;
+    const userInfo = await userdata.getByEmail(email);
+
+    const currentUsername = userInfo.name;
+    if (userInfo) {
       try {
-//        const userInfo = req.session.user;
-        const userInfo = "";
         const info = req.body;
-        const parkId = req.params.id;
+        const articleId = req.params.id;
         if (!info.newCommentRating || !info.newCommentTxt)
           throw "Please provide all the input for createComment!";
         const infonewCommentRating = xss(info.newCommentRating);
