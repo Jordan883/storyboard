@@ -4,9 +4,13 @@ const { requiresAuth } = require('express-openid-connect');
 const userData = require('../data').users;
 
 router.get('/', requiresAuth() , async (req, res) => {
-    const user = await userData.getByEmail( req.oidc.user.email );
+    let user = null;
+    try {
+        user = await userData.getByEmail( req.oidc.user.email );
+    } catch (e) {
+        res.redirect('/users/register')
+    }
     if(user) res.status(200).render('home')
-    else res.redirect('/users/register')
 })
 
 

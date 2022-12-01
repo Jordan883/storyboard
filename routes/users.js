@@ -138,12 +138,12 @@ router.post("/register", async (req, res) => {
 router.get('/twofa', async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     try {
-      res.status(200).render("functions/twofalogin");
+      return res.status(200).render("functions/twofalogin");
     } catch (e) {
-      res.status(500)
+      return res.status(500)
     }
   } else {
-    res.redirect("/login");
+    return res.redirect("/login");
   }
 })
 
@@ -161,12 +161,12 @@ router.post('/twofa', async (req, res) => {
     });
 
     if (validated){
-      res.status(200).redirect('/')
+      return res.status(200).redirect('/')
     } else {
       // TODO: throw error
     }
   } else {
-    res.redirect("/login");
+    return res.redirect("/login");
   }
 })
 
