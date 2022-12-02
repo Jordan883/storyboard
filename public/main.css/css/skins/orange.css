@@ -1,0 +1,30 @@
+/* ====================================================
+	Accent Colour (Links, buttons, borders, etc)
+   ==================================================== */
+
+/* Colour */
+a,
+.post .entry-title,
+.author-name,
+.posts-by-author-title {
+	color:#F09A4D;
+}
+
+/* Background Colour */
+#masthead,
+#isotope-menu,
+.isotope-item a .overlay,
+.project-description-title:after,
+.project-details-title:after,
+button,
+.button,
+input[type="submit"],
+input[type="cancel"],
+::selection {
+	background-color:#F09A4D;
+}
+
+/* Borders */
+#prefooter {
+	border-color:#F09A4D;
+}

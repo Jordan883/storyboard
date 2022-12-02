@@ -1,13 +1,79 @@
 <!--- Body goes here --->
-<article>
-  <h1 class="main-title">Search Articles</h1>
-  <form action="/search" method="POST" id="searchForm">
-    <input type="text" class="search" name="parkname" id="homeSearchTxt" placeholder="Please input article name"/>
-    <button type="submit" class="button" id="homeSearch"><span>Search</span></button>
-  </form>
+	<main id="content" role="main">
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+
+					<div class="three-quarters-block">
+						<div class="content">
+                <header class="entry-header">
+
+									<h2 class="entry-title" itemprop="headline">Welcome to our site!</h2>
+
+								</header> 
+		<!-- Not use for now			
+							<article class="post hentry" itemscope itemprop="blogPost" itemtype="http://schema.org/Article">
+
+
+
+								<div class="entry-image">
+									<img src="http://dummyimage.com/800x250/f3f3f3/d1d1d1.jpg&text=Featured+Image" alt="Featured Image" itemprop="image">
+								</div> 
+
+								<div class="entry-content" itemprop="articleBody">
+
+									<p>A project for CS555.</p>
+									
+								</div> 
+
+							</article> 
+-->
+						</div> <!-- .content -->
+					</div> <!-- .three-quarters-block -->
+					
+					<div class="one-quarter-block" role="complementary">
+						<div class="sidebar">
+
+							<div class="search-widget widget">
+								<form class="widget-form" action="/search" method="POST" id="searchForm">
+									<label>
+										<span class="screen-reader-text">Search this website:</span>
+										<input type="text" class="search-field" name="parkname" id="homeSearchTxt" placeholder="Search: input article name" value="" title="Search" />
+									</label>
+									<button><i class="fa fa-search" type="submit" id="homeSearch"></i></button>
+								</form>
+							</div> <!-- .search.widget -->
+
+<!-- Not use for now
+							<div class="widget">
+								<h3 class="widget-title">Categories</h3>
+								<ul>
+									<li><a href="blog.html">Category One test</a></li>
+								</ul>
+							</div> 
+
+							<div class="widget">
+								<h3 class="widget-title">Archives</h3>
+								<ul>
+									<li><a href="blog.html">Nov 2022 test</a></li>
+
+								</ul>
+							</div> 
+-->
+
+						</div> <!-- .sidebar -->
+					</div> <!-- .one-quarter-block -->
+
+				</div> <!-- .row -->
+			</div> <!-- .container -->
+		</div> <!-- .section -->
+
+	</main> <!-- #content -->
+
+  
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
       crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
       crossorigin="anonymous"></script>
 <script src="/public/ajaxHome.js"></script>
-</article>

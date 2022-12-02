@@ -1,27 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>StoryBoard</title>
-    <link rel="stylesheet" href="/public/site.css">
-</head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<body>
-  <header>
-    <div>
-        <ul class="topnav">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<!-- Place favicon.ico in the root directory -->
+
+	<title>Home Page</title>
+
+	<link media="all" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link media="all" type="text/css" href="/public/main.css/css/font-awesome.min.css" rel="stylesheet">
+	<link media="all" type="text/css" href="/public/main.css/css/core.css" rel="stylesheet">
+	<link media="all" type="text/css" href="/public/main.css/css/skins/red.css" rel="stylesheet">
+	<link media="all" type="text/css" href="/public/main.css/css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/site.css">
+</head>
+<body class="home" itemscope itemtype="http://schema.org/WebPage">
+
+	<div id="masthead">
+
+		<div id="site-header" role="banner">
+			<div class="container">
+				<div class="row">
+
+					<div id="branding">
+						<a class="logo" href="/">Storyboard</a>
+					</div> <!-- #branding -->
+
+					<nav id="main-menu" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<ul class="horizontal-navigation">
             <li><a href="/">HOME</a></li>
             <li><a href="/articlesList">Articles</a></li>
             <li class="right"><a href="/about">ABOUT</a></li>
             <li class="right"><a href="/users/profile">USER</a></li>
-        </ul>
-    </div>
-  </header> 
-  <main >
-    {{{body}}}
-  </main>
+
+						</ul>
+
+						</ul>
+					</nav> <!-- #main-menu -->
+
+				</div> <!-- .row -->
+			</div> <!-- .container -->
+		</div> <!-- #site-header -->
+
+		<div id="page-title">
+			<div class="container">
+				<div class="row">
+
+					<h1 class="entry-title" itemprop="headline">A Family Blog For You.</h1>
+					<p class="description" itemprop="description">CS555 Final project</p>
+
+				</div> <!-- .row -->
+			</div> <!-- .container -->
+		</div> <!-- #page-title -->
+
+	</div> <!-- #masthead -->
+
+
+
+  {{{body}}}
+
+
+	<!-- Scripts -->
+  <!-- In the home.handlebars -->
+
 </body>
 
 
+<!--
+<div id="prefooter" role="complementary">
+
+</div>  
+
+ #prefooter not use for now.-->
+
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="row">
+
+      <div class="copyright">&copy; StoryBoard</div>
+      <div class="attribution">Using free css by <a href="http://www.google.com" title="Using free css by Storyboard" target="_blank">Storyboard</a>.</div>
+
+    </div> <!-- .row -->
+  </div> <!-- .container -->
+</footer> <!-- #footer -->
 </html>
