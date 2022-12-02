@@ -189,7 +189,7 @@ router.post('/twofa', async (req, res) => {
       await familiesData.updateFamilyAuthHistory(user.family, [user.username, 'LOGIN', new Date().toUTCString()]);
       return res.status(200).redirect('/');
     } else {
-      return res.status(400).render('/functions/twofalogin');
+      return res.status(400).render('functions/twofalogin');
     }
   } else {
     return res.redirect("/login");

@@ -17,7 +17,7 @@ router.route("/").get(async (req, res) => {
 
     // content restrict if user is child by their restrict level
     if (isChild){
-        articles = await data.getArticlesByRestrict(familyInfo.content_restrict);
+        articles = await data.getArticlesByRestrict(familyInfo.content_restrict, email);
     }else{
         articles = await data.getAllArticles();
     }
