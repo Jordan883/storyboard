@@ -1,0 +1,21 @@
+<header>
+    <h1>
+        EDIT ARTICLE
+    </h1>
+</header>
+<div>
+    <form action="/articles/editArticle/{{article._id}}" method="POST" enctype="multipart/form-data" readonly>
+        <div class="date">
+            <p>Title:</p>
+            <input type="text" id="title" name="title" value={{article.title}} readonly>
+            <p>Content:</p>
+            <textarea type="text" id="content" name="content" style="width:800px; height:400px;">{{content}}</textarea>
+        </div>
+        <div>
+            <button type="submit" class="button">Post</button>
+        </div>
+    </form>
+    {{#if error}}
+	    <p >{{error}}</p>
+    {{/if}}
+</div>

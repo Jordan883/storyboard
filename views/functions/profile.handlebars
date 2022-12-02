@@ -13,6 +13,17 @@
       <p> Email Address </p>
       <input type="text" id="email" name="email" value="{{user.email}}" disabled="disabled"/>
       <p>Family</p>
+          {{#if isParent}}
+          <label>child restrict level:</label>
+              <select name="content_restrict" id="content_restrict">
+                  <option value={{restrict_level}} selected disabled hidden>{{restrict_level}}</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+          {{/if}}
       <div>
         <h3>Parents</h3>
         {{#each parents}}
@@ -46,7 +57,10 @@
       <p>{{user.username}}</p>
       <p> Email Address </p>
       <p>{{user.email}}</p>
-      <p>Family</p>
+      <h2>Family</h2>
+          {{#if isParent}}
+            <p>child content restrict:{{restrict_level}}</p>
+          {{/if}}
       <div>
         <h3>Parents</h3>
         {{#each parents}}
@@ -79,7 +93,7 @@
       </div>
     </form>
 
-    {{#if parent}}
+    {{#if isParent}}
     <h2>Family Authentication History</h2>
      <table>
       <tr>

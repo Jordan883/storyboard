@@ -17,7 +17,7 @@ async create(type,email,username,name,secret){
         secret:secret,
         name:name,
         family:null,
-        content_restrict:null
+//        content_restrict:null
     };
 
     const olduser = await userCollection.findOne({email:email})
@@ -44,7 +44,7 @@ async getByEmail(email){
     return user
 },
 
-async updateUser(id,type,email,name,username,family,content_restrict){
+async updateUser(id,type,email,name,username,family){
     const userCollection = await users();
     let modifyuser = {
         type:type,
@@ -52,9 +52,9 @@ async updateUser(id,type,email,name,username,family,content_restrict){
         username:username,
         name:name,
         family:family,
-        content_restrict:content_restrict
+//        content_restrict:content_restrict,
       };
-  
+
       const updatedInfo = await userCollection.updateOne(
         { _id: ObjectId(id) },
         { $set: modifyuser }

@@ -1,0 +1,14 @@
+    <h1>Article History</h1>
+    <hr>
+    <ul>
+    {{#each version}}
+        <li>
+        <form action="/articles/restoreVersion/{{_id}}" method="POST" enctype="multipart/form-data">
+            <p>{{text}}</p>
+            <div>
+            <button type="submit" class="button">Restore</button>
+        </form>
+        </div>
+        </li>
+    {{/each}}
+    </ul>
