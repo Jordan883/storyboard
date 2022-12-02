@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const { auth } = require('express-openid-connect');
 require('dotenv').config()
 const static = express.static(__dirname + '/public');
@@ -14,12 +15,7 @@ const config = {
   issuerBaseURL: 'https://dev-kn-xijmw.us.auth0.com'
 };
 
-
-//引入multer
 const multer = require('multer')
-////引入 path 和 fs
-//const path = require('path')
-//const fs = require('fs')
 
 const handlebarsInstance = exphbs.create({
   defaultLayout: 'main',
@@ -40,17 +36,18 @@ const app = express();
 app.engine('handlebars', handlebarsInstance.engine);
 app.set('view engine', 'handlebars');
 
-//引入 path 和 fs
-//const path = require('path')
-//const fs = require('fs')
-//const upload = multer({dest: './images'})
-
-//使用中间件，没有挂载路径，应用的每个请求都会执行该中间件。any表示接受一切，具体参考文档。
-//app.use(upload.any())
-
 app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+      name: '2FAAuthCookie',
+      secret: '2FASecret',
+      resave: false,
+      saveUninitialized: true
+  })
+);
 
 app.use(auth(config));
   // '/login', '/logout', and '/callback' are taken. 

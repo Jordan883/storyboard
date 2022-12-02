@@ -512,8 +512,8 @@ ul.topnav li.right {float: right;}
   box-shadow: 0 0 5px #ccc;
 }
 
-/*Single park page*/
-.parkImg {
+/*Single article page*/
+.singleArticle {
   margin: 50px 0 50px 0;
   border-radius: 20px;
   width: 500px;
@@ -521,12 +521,12 @@ ul.topnav li.right {float: right;}
   object-fit: cover
 }
 
-.parkCard {
+.articleCard {
   width: 1000px;
   padding: 20px;
   overflow: hidden;
 }
-.parkCard .parkCardImg {
+.articleCard .articleCardImg {
   margin-right: 15px;
   float: left;
   width: 50%;
@@ -535,7 +535,7 @@ ul.topnav li.right {float: right;}
   height: 300px;
   object-fit: cover
 }
-.parkCard .parkCardText {
+.articleCard .articleCardText {
   margin-left: 50%;
   display: block;
   margin: 2px 0 0 0;
@@ -546,12 +546,12 @@ ul.topnav li.right {float: right;}
   display: table;
   color: #000000;
 }
-.parkCard h2 {
+.articleCard h2 {
   color: #000000;
   font-size: 1.5em;
   margin-bottom: 1px;
 }
-.parkCard p {
+.articleCard p {
   font-size: 1em;
   margin-bottom: 0;
 }
@@ -593,15 +593,15 @@ ul.topnav li.right {float: right;}
   padding-left: 20px;
 }
 
-/* For single park */
-.singlePark{
+/* For single article */
+.singleArticle{
   margin: 0 auto;
   width: 500px;
 }
-.singlePark img{
+.singleArticle img{
   float: center;
 }
-.parkInfo{
+.articleInfo{
   width: 500px;
   text-align: left;
 }

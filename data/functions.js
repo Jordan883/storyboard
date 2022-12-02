@@ -57,11 +57,24 @@ function checkString(string) {
   return true;
 }
 
+function computeRating(article) {
+  let rating = 0;
+  let num = article.comments.length;
+  if (num === 0) {
+    return rating;
+  }
+  for (let a of article.comments) {
+    rating += parseInt(a.rating);
+  }
+  return Math.floor((rating / num) * 100) / 100;
+}
+
 module.exports = {
   checkUserName,
   checkEmail,
   checkPassword,
   checkId,
   checkString,
-  checkNumber
+  checkNumber,
+  computeRating,
 }

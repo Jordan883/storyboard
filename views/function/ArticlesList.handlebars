@@ -1,0 +1,40 @@
+    <h1>Articles</h1>
+    {{#if isChild}}
+        <form action="/articles/newArticle" method="get" id="create-article">
+        <div class="login">
+            <button type="submit" class="button">Create A New Article</button>
+        </div>
+        </form>
+    {{/if}}
+    <ul>
+    {{#each articles}}
+        <li>
+            <div class="articleCard">
+                <img src="{{image}}" onerror="this.src='https://blog.nscsports.org/wp-content/uploads/2014/10/default-img.gif'" alt="{{title}}" class="articleCardImg">
+                <a href="/articles/id/{{_id}}" class="articleCardText">
+                    <h2>{{title}}</h2>
+                    <div class="star-rating-num">({{rating}})
+                        <div class="star-rating">
+                            <div class="star-rating-top" style="width:{{rating}}%">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                            <div class="star-rating-bottom">
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                                <span>★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Author: {{poster}}</p>
+                    <br/>
+                </a>
+            </div>
+        </li>
+    {{/each}}
+    </ul>

@@ -13,8 +13,19 @@
       <p> Email Address </p>
       <input type="text" id="email" name="email" value="{{user.email}}" disabled="disabled"/>
       <p>Family</p>
+          {{#if isParent}}
+          <label>child restrict level:</label>
+              <select name="content_restrict" id="content_restrict">
+                  <option value={{restrict_level}} selected disabled hidden>{{restrict_level}}</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+              </select>
+          {{/if}}
       <div>
-        <h2>Parents</h2>
+        <h3>Parents</h3>
         {{#each parents}}
         <p>Name:</p>
         {{this.name}}
@@ -23,7 +34,7 @@
         {{/each}}
       </div>
       <div>
-        <h2>Children</h2>
+        <h3>Children</h3>
         {{#if children}}
         {{#each children}}
         <p>Name:</p>
@@ -46,9 +57,12 @@
       <p>{{user.username}}</p>
       <p> Email Address </p>
       <p>{{user.email}}</p>
-      <p>Family</p>
+      <h2>Family</h2>
+          {{#if isParent}}
+            <p>child content restrict:{{restrict_level}}</p>
+          {{/if}}
       <div>
-        <h2>Parents</h2>
+        <h3>Parents</h3>
         {{#each parents}}
         <p>Name:</p>
         {{this.name}}
@@ -57,7 +71,7 @@
         {{/each}}
       </div>
       <div>
-        <h2>Children</h2>
+        <h3>Children</h3>
         {{#if children}}
         {{#each children}}
         <p>Name:</p>
@@ -75,9 +89,27 @@
       {{/if}}
 
       <div>
-        <a href="/logout">Log out</a>
+        <a href="/users/logout">Log out</a>
       </div>
     </form>
+
+    {{#if isParent}}
+    <h2>Family Authentication History</h2>
+     <table>
+      <tr>
+        <th>User</th>
+        <th>Action</th>
+        <th>Timestamp</th>
+      </tr>
+      {{#each history}}
+      <tr>
+        <td>{{this.[0]}}</td>
+        <td>{{this.[1]}}</td>
+        <td>{{this.[2]}}</td>
+      </tr>
+      {{/each}}
+    </table> 
+    {{/if}}
   </div>
   
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="

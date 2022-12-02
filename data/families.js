@@ -35,7 +35,7 @@ const updateUserFamilies = async (userIds, value) => {
             user.name,
             user.username,
             user.family,
-            user.content_restrict
+//            user.content_restrict
         );
     }
 }
@@ -62,7 +62,9 @@ const createFamily = async (
         children: [],
         articleWriteHistory: [],
         articleViewHistory: [],
-        commentHistory: []
+        commentHistory: [],
+        authHistory: [],
+        content_restrict:5
     }
 
     const familyColl = await families();
@@ -165,6 +167,15 @@ const updateFamily = async (
     return newFamily;
 }
 
+const updateFamilyAuthHistory = async (id, entry) => {
+    const familyColl = await families();
+    const update = await familyColl.updateOne({_id: helpers.idHandler(id)}, {$push: {authHistory: entry}});
+    if (update.modifiedCount == 0){
+        throw 'Error: Could not update family history successfully'
+    }
+    return getFamilyById(id);
+}
+
 const removeFamily = async (id) => {
     id = helpers.idHandler(id, 'Family');
 
@@ -184,10 +195,21 @@ const removeFamily = async (id) => {
         // Maybe the first parent's first name? 
 }
 
+const updateContentRestrict = async (id, level) => {
+    const familyColl = await families();
+    const updateInfo = await familyColl.updateOne(
+    { _id: ObjectId(id) },
+    { $set: { content_restrict: parseInt(level) } }
+    );
+    return `Family has been successfully deleted!`;
+}
+
 module.exports = {
     createFamily,
     getAllFamilies,
     getFamilyById,
     updateFamily,
-    removeFamily
+    updateFamilyAuthHistory, 
+    removeFamily,
+    updateContentRestrict
 }

@@ -2,7 +2,11 @@
 node_modules/
 
 # Ignore image uploads
+public/images/
 images/
 
 # Ignore .env
 .env
+
+.idea/
+package-lock.jsonbak

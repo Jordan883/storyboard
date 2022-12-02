@@ -8,7 +8,7 @@ $("#actSearch").click(function () {
   $(".ActList").hide();
   $(".actSearchDiv").show();
   $.ajax({
-    url: "http://localhost:3000/parks/search",
+    url: "http://localhost:3000/articles/search",
     type: "post",
     data: $('#actSearchForm').serialize(),
     dataType: "json",
@@ -27,7 +27,7 @@ $("#actSearch").click(function () {
         var rating = (element.averageRating / 5) * 100;
         txtLi.innerHTML = `
             <div class="actSearchTxtListItem">
-              <a href="/parks/id/${element._id}" class="a">
+              <a href="/articles/id/${element._id}" class="a">
                   <p>${element.name}</p>
                   <div class="star-rating-num">(${element.averageRating})
                       <div class="star-rating">
