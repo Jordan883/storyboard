@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require("../data/articles");
 const userdata = require("../data/users");
 const familydata = require("../data/families");
+const commentdata = require("../data/comments");
 const { requiresAuth } = require('express-openid-connect');
 const multer = require('multer')
 
@@ -144,37 +145,32 @@ router.get("/id/:id", requiresAuth(), async (req, res) => {
     }
 });
 
+
 router.get("/id/comments/:id", requiresAuth(), async (req, res) => {
+
     // get user info
     const email = req.oidc.user.email;
-    const loginUser = await userdata.getByEmail(email);
-
-    const currentUsername = loginUser.name;
+    const userInfo = await userdata.getByEmail(email);
+    if (userInfo)
+      var currentUsername = userInfo.name;
+    else currentUsername = null;
     try {
       const article = await data.get(req.params.id);
       const comments = article.comments;
+
       var userList = [];
       for (const element of comments) {
-        const userInfo = await userdata.get(element.userId);
-//        const name = userInfo.firstname + " " + userInfo.lastname;
-        const name = "dummy"
-//        var user = {
-//          currentUsername: currentUsername,
-//          userId: element.userId,
-//          username: name,
-//          comment: element.parkComment,
-//          timestamp: element.timestamp,
-//          commentId: element._id,
-//          reply: element.reply,
-//        };
+
+        const userInfoInner = await userdata.get(element.userId);
+        const name = userInfoInner.name;
         var user = {
-            currentUsername: currentUsername,
-            userId: "",
-            username: name,
-            comment: "",
-            timestamp: "",
-            commentId: "",
-            reply: "",
+          currentUsername: currentUsername,
+          userId: element.userId,
+          username: name,
+          comment: element.articleComment,
+          timestamp: element.timestamp,
+          commentId: element._id,
+          reply: element.reply,
         };
         userList.push(user);
       }
@@ -183,25 +179,30 @@ router.get("/id/comments/:id", requiresAuth(), async (req, res) => {
       res.status(500).json({ error: error });
     }
   })
-  .post(async (req, res) => {
+
+router.post("/id/comments/:id", requiresAuth(), async (req, res) => {
+
+    // get user info
     const email = req.oidc.user.email;
     const userInfo = await userdata.getByEmail(email);
 
-    const currentUsername = userInfo.name;
     if (userInfo) {
       try {
         const info = req.body;
         const articleId = req.params.id;
         if (!info.newCommentRating || !info.newCommentTxt)
           throw "Please provide all the input for createComment!";
-        const infonewCommentRating = xss(info.newCommentRating);
-        const infonewCommentTxt = xss(info.newCommentTxt);
+        const text = xss(info.newCommentTxt);
+        const rating = xss(info.rating);
+        const userId = userInfo._id;
+
         const comment = await commentdata.createComment(
           articleId,
-          "",
-          infonewCommentRating,
-          infonewCommentTxt
+          userId,
+          rating,
+          text,
         );
+
         res.status(200).json(comment);
       } catch (error) {
         res.status(500).json({ error: error });
@@ -209,7 +210,37 @@ router.get("/id/comments/:id", requiresAuth(), async (req, res) => {
     } else
       res
         .status(400)
-        .render("function/Login", { error: "Log in to comment parks!!!" });
+        .render("function/Login", { error: "Log in to comment articles!!!" });
   });
+
+router.route("/id/comments/reply/:id").post(async (req, res) => {
+  if (req.session.user) {
+    try {
+      const userInfo = req.session.user;
+      const info = req.body;
+      const commentId = req.params.id;
+      if (!info.newCommentTxt)
+        throw "Please provide all the input for replyComment!";
+      const replyToUser = await commentdata.getUserByCommentId(commentId);
+      const comment =
+        "@" +
+        replyToUser.firstname +
+        replyToUser.lastname +
+        " " +
+        info.newCommentTxt;
+      const updated = await commentdata.replyComment(
+        commentId,
+        userInfo.userId,
+        comment
+      );
+      res.status(200).json(updated);
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  } else
+    res
+      .status(400)
+      .render("function/Login", { error: "Log in to comment articles!!!" });
+});
 
 module.exports = router;

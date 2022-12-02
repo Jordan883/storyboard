@@ -7,13 +7,9 @@ const { ObjectId } = require('mongodb');
 
 module.exports = {
   async createComment(articleId, userId, rating, articleComment) {
-    if (!articleId || !userId || !rating || !articleComment) throw 'please provide all inputs for comment';
-    if (arguments.length != 4) throw 'the number of parameter is wrong';
-    if (!ObjectId.isValid(articleId)) throw 'invalid article ID';
-    if (!ObjectId.isValid(userId)) throw 'invalid user ID';
-
     const newId = ObjectId();
     const date = new Date();
+
     let newComment = {
       _id: newId,
       articleId: articleId,
@@ -23,7 +19,6 @@ module.exports = {
       articleComment: articleComment,
       reply: []
     };
-
     const articleCollection = await articles();
     const updateInfo = await articleCollection.updateOne({ _id: ObjectId(articleId) },
       { $addToSet: { comments: newComment } }
@@ -33,9 +28,10 @@ module.exports = {
 
     let article = await articleCollection.findOne({ _id: ObjectId(articleId) });
     const rate = func.computeRating(article);
+
     const updatedInfo = await articleCollection.updateOne(
       { _id: ObjectId(articleId) },
-      { $set: { averageRating: rate } }
+      { $set: { content_rating: rate } }
     );
     if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
       throw 'Could not update average rating';

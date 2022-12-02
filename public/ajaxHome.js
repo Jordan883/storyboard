@@ -10,7 +10,7 @@ $("#orderByRating").click(function () {
   $("#homeRecommendationDiv").fadeIn(100);
   $("#homePopularDiv").fadeOut(100);
   $.ajax({
-    url: "http://localhost:3000/parks/ParksOrderByRating",
+    url: "http://localhost:3000/articles/ArticlesOrderByRating",
     type: "get",
     dataType: "json",
     success: function (res) {
@@ -30,7 +30,7 @@ $("#orderByRating").click(function () {
         var rating = (element.averageRating / 5) * 100;
         txtLi.innerHTML = `
             <div class="homeRecommendationTxtListItem">
-              <a href="/parks/id/${element._id}" class="a">
+              <a href="/articles/id/${element._id}" class="a">
                   <p>${element.name}</p>
                   <div class="star-rating-num">(${element.averageRating})
                       <div class="star-rating">
@@ -69,7 +69,7 @@ $("#orderByLikes").click(function () {
   $("#homeRecommendationDiv").fadeOut(100);
   $("#homePopularDiv").fadeIn(100);
   $.ajax({
-    url: "http://localhost:3000/parks/ParksOrderByLikes",
+    url: "http://localhost:3000/articles/ArticlesOrderByLikes",
     type: "get",
     dataType: "json",
     success: function (res) {
@@ -89,7 +89,7 @@ $("#orderByLikes").click(function () {
         var rating = (element.averageRating / 5) * 100;
         txtLi.innerHTML = `
             <div class="homePopularTxtListItem">
-              <a href="/parks/${element._id}" class="a">
+              <a href="/articles/${element._id}" class="a">
                   <p>${element.name}</p>
                   <div class="star-rating-num">(${element.averageRating})
                       <div class="star-rating">
@@ -132,7 +132,7 @@ $("#homeSearch").click(function () {
   ratingDiv.hide();
   searchDiv.show();
   $.ajax({
-    url: "http://localhost:3000/parks/search",
+    url: "http://localhost:3000/articles/search",
     type: "post",
     data: $('#searchForm').serialize(),
     dataType: "json",
@@ -153,7 +153,7 @@ $("#homeSearch").click(function () {
         var rating = (element.averageRating / 5) * 100;
         txtLi.innerHTML = `
             <div class="homeSearchTxtListItem">
-              <a href="/parks/id/${element._id}" class="a">
+              <a href="/articles/id/${element._id}" class="a">
                   <p>${element.name}</p>
                   <div class="star-rating-num">(${element.averageRating})
                       <div class="star-rating">
@@ -190,7 +190,7 @@ $("#homeSearch").click(function () {
   return false;
 });
 
-$("#parkComment").click(function () {
+$("#articleComment").click(function () {
   var likesDiv = $("#homePopularDiv");
   var ratingDiv = $("#homeRecommendationDiv");
   var searchDiv = $("#homeSearchDiv");
@@ -200,7 +200,7 @@ $("#parkComment").click(function () {
   ratingDiv.hide();
   searchDiv.show();
   $.ajax({
-    url: "http://localhost:3000/parks/search",
+    url: "http://localhost:3000/articles/search",
     type: "post",
     data: $('#searchForm').serialize(),
     dataType: "json",
@@ -221,7 +221,7 @@ $("#parkComment").click(function () {
         var rating = (element.averageRating / 5) * 100;
         txtLi.innerHTML = `
             <div class="homeSearchTxtListItem">
-              <a href="/parks/id/${element._id}" class="a">
+              <a href="/articles/id/${element._id}" class="a">
                   <p>${element.name}</p>
                   <div class="star-rating-num">(${element.averageRating})
                       <div class="star-rating">

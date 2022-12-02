@@ -162,7 +162,7 @@ function loadComments() {
       }
     },
     error: function (error) {
-      alert("something wrong!")
+      alert("something wrong!", error)
     }
   })
 }

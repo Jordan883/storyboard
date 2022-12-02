@@ -34,8 +34,8 @@
                 </div>
                 <div class="commentContent">
                     <div class="commentContentTxt">
-                        <form action="/id/comments/{{article._id}}" method="POST" id="newCommentForm">
-                            <input id={{article._id}} name="singleArticleId" hidden />
+                        <form action="/id/comments/{{articles._id}}" method="POST" id="newCommentForm">
+                            <input id={{articles._id}} name="singleArticleId" hidden />
                             <input type="text" id="newCommentRating" name="newCommentRating" placeholder="Leave a rate from 0 to 5" value="0" hidden />
                             <div class="rating">
                                 <input type="radio" class="ratingNumber" id="star5" name="rating" value="5" hidden/>
@@ -58,7 +58,13 @@
                     </div>
                 </div>
             </div>
+
             <hr>
+
+            <div class="ArticleComment">
+                <ul id="commentsList" class="commentsList"></ul>
+            </div>
+
         </div>
     </div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="

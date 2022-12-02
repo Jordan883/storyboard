@@ -23,7 +23,7 @@ router.route("/").get(async (req, res) => {
     }
 
     for (let article of articles) {
-      article.rating = (article.content_rating / 5) * 100;
+      article.rating = article.content_rating;
       const userInfo = await userdata.getByEmail(article.poster);
       article.poster = userInfo.name
     }
@@ -38,12 +38,12 @@ router.route("/search").post(async (req, res) => {
   try {
     const info = req.body;
     let searchdata;
-    if ("parkname" in info) {
-      const infoparkname = xss(info.parkname);
-      searchdata = await data.getParksByName(infoparkname);
+    if ("articlename" in info) {
+      const infoarticlename = xss(info.articlename);
+      searchdata = await data.getArticlesByName(infoarticlename);
     } else {
       const infoactivityname = xss(info.activityname);
-      searchdata = await activitydata.getAllParksByActivityName(
+      searchdata = await activitydata.getAllArticlesByActivityName(
         infoactivityname
       );
     }
@@ -60,8 +60,8 @@ router
       var currentUsername = req.session.user.name;
     else currentUsername = null;
     try {
-      const park = await data.getParkById(req.params.id);
-      const comments = park.comments;
+      const article = await data.getArticleById(req.params.id);
+      const comments = article.comments;
       var userList = [];
       for (const element of comments) {
         const userInfo = await userdata.getUserById(element.userId);
@@ -70,7 +70,7 @@ router
           currentUsername: currentUsername,
           userId: element.userId,
           username: name,
-          comment: element.parkComment,
+          comment: element.articleComment,
           timestamp: element.timestamp,
           commentId: element._id,
           reply: element.reply,
@@ -87,13 +87,13 @@ router
       try {
         const userInfo = req.session.user;
         const info = req.body;
-        const parkId = req.params.id;
+        const articleId = req.params.id;
         if (!info.newCommentRating || !info.newCommentTxt)
           throw "Please provide all the input for createComment!";
         const infonewCommentRating = xss(info.newCommentRating);
         const infonewCommentTxt = xss(info.newCommentTxt);
         const comment = await commentdata.createComment(
-          parkId,
+          articleId,
           userInfo.userId,
           infonewCommentRating,
           infonewCommentTxt
@@ -105,7 +105,7 @@ router
     } else
       res
         .status(400)
-        .render("function/Login", { error: "Log in to comment parks!!!" });
+        .render("function/Login", { error: "Log in to comment!!!" });
   });
 
 router.route("/id/comments/reply/:id").post(async (req, res) => {
@@ -135,7 +135,7 @@ router.route("/id/comments/reply/:id").post(async (req, res) => {
   } else
     res
       .status(400)
-      .render("function/Login", { error: "Log in to comment parks!!!" });
+      .render("function/Login", { error: "Log in to comment!!!" });
 });
 
 module.exports = router;
