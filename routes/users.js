@@ -5,9 +5,9 @@ const speakeasy = require('speakeasy');
 const router = express.Router();
 const userData = require('../data/users')
 const familiesData=require('../data/families')
+const { auth_middleware }  = require('./auth_middleware');
 
-router.get("/profile", async (req, res) => {
-  if(req.oidc.isAuthenticated()){
+router.get("/profile", auth_middleware, async (req, res) => {
   try {
     let user = await userData.getByEmail(req.oidc.user.email);
     const family=await familiesData.getFamilyById(user.family) 
@@ -24,17 +24,14 @@ router.get("/profile", async (req, res) => {
       child = await userData.get(family.children[i])
       children.push(child)
     }
-    res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:false });
+    res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:false, 
+      parent:user.type=='Parent', history: family.authHistory});
   } catch (e) {
     res.status(400).json({ error: e });
   }
-}else{
-  res.status(200).redirect('/login')
-}
 });
 
-router.post("/profile", async (req, res) => {
-  if(req.oidc.isAuthenticated()){
+router.post("/profile", auth_middleware, async (req, res) => {
     try{
       
       if(Object.keys(req.body).length >0){
@@ -59,14 +56,14 @@ router.post("/profile", async (req, res) => {
           child = await userData.get(family.children[i])
           children.push(child)
         }
-        res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:true });
+        res.status(200).render("functions/profile",{ user:user,parents:parents,children:children, edit:true, 
+          parent:user.type=='Parent', history: family.authHistory});
       }
     }catch(e){
       res.status(400).json({error:e})
     }
   }
-  else res.status(200).redirect('/login')
-})
+)
 
 router.get("/register", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
@@ -96,6 +93,13 @@ router.post("/register", async (req, res) => {
 
       const base32secret = req.body.base32;
       const userToken = req.body.token;
+      const twofaReset = {
+        qrsecret: req.body.qr,
+        secret: {
+          base32: req.body.base32
+        }
+      }
+
       const verified = speakeasy.totp.verify({ secret: base32secret, encoding: 'base32', token: userToken });
       if (!verified) {
         // TODO: Throw error
@@ -115,7 +119,7 @@ router.post("/register", async (req, res) => {
         }
       }
       else if(type=="Child") {
-        if(!req.body.parentemail) res.status(400).render("functions/registration",{error:"As a child, you should type parent email"})
+        if(!req.body.parentemail) res.status(400).render("functions/registration",{user: req.oidc.user, twofaSetup: twofaReset, error:"As a child, you should type parent email"})
         else {
           const baseParentEmail = req.body.parentemail
           const baseParent = await userData.getByEmail(baseParentEmail)
@@ -128,7 +132,7 @@ router.post("/register", async (req, res) => {
       res.status(200).redirect('/')
       
     } catch (e) {
-      res.status(400).render("functions/registration",{error:e})
+      res.status(400).render("functions/registration",{user: req.oidc.user, twofaSetup: twofaReset, error:e})
     }
   } else {
     res.status(400).redirect("/users/login");
@@ -161,13 +165,22 @@ router.post('/twofa', async (req, res) => {
     });
 
     if (validated){
-      return res.status(200).redirect('/')
+      req.session.user = user.username;
+      await familiesData.updateFamilyAuthHistory(user.family, [user.username, 'LOGIN', new Date().toUTCString()]);
+      return res.status(200).redirect('/');
     } else {
-      // TODO: throw error
+      return res.status(400).render('/functions/twofalogin');
     }
   } else {
     return res.redirect("/login");
   }
+})
+
+router.get('/logout', async (req, res) => {
+  const user = await userData.getByEmail(req.oidc.user.email);
+  await familiesData.updateFamilyAuthHistory(user.family, [user.username, 'LOGOUT', new Date().toUTCString()]);
+  req.session.destroy();
+  res.redirect('/logout');
 })
 
 module.exports = router;

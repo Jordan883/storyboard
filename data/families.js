@@ -62,7 +62,8 @@ const createFamily = async (
         children: [],
         articleWriteHistory: [],
         articleViewHistory: [],
-        commentHistory: []
+        commentHistory: [],
+        authHistory: []
     }
 
     const familyColl = await families();
@@ -165,6 +166,15 @@ const updateFamily = async (
     return newFamily;
 }
 
+const updateFamilyAuthHistory = async (id, entry) => {
+    const familyColl = await families();
+    const update = await familyColl.updateOne({_id: helpers.idHandler(id)}, {$push: {authHistory: entry}});
+    if (update.modifiedCount == 0){
+        throw 'Error: Could not update family history successfully'
+    }
+    return getFamilyById(id);
+}
+
 const removeFamily = async (id) => {
     id = helpers.idHandler(id, 'Family');
 
@@ -189,5 +199,6 @@ module.exports = {
     getAllFamilies,
     getFamilyById,
     updateFamily,
+    updateFamilyAuthHistory, 
     removeFamily
 }

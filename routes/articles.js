@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require("../data/articles");
 const userdata = require("../data/users");
 const { requiresAuth } = require('express-openid-connect');
+const { auth_middleware }  = require('./auth_middleware');
 const multer = require('multer')
 
 var xss = require("xss");
@@ -11,22 +12,22 @@ const fs = require('fs')
 const upload = multer({dest: './images/'})
 router.use(upload.any())
 
-router.get("/", requiresAuth(), async (req, res) => {
+router.get("/", auth_middleware, async (req, res) => {
     res.status(200).render("function/Articles_Menu", {
     });
 });
 
-router.post("/", requiresAuth(), async (req, res) => {
+router.post("/", auth_middleware, async (req, res) => {
     res.status(200).render("function/Articles_Menu", {
     });
 });
 
-router.get("/newArticle", requiresAuth(), async (req, res) => {
+router.get("/newArticle", auth_middleware, async (req, res) => {
     res.status(200).render("function/Articles", {
     });
 });
 
-router.post("/newArticle", requiresAuth(), async (req, res) => {
+router.post("/newArticle", auth_middleware, async (req, res) => {
     try {
       var body = req.body;
       

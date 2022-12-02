@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.81% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>183/193</span>
+                <span class='fraction'>187/204</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.81% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>183/193</span>
+                <span class='fraction'>187/204</span>
             </div>
         
             
@@ -255,7 +255,18 @@
 <a name='L190'></a><a href='#L190'>190</a>
 <a name='L191'></a><a href='#L191'>191</a>
 <a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -313,6 +324,7 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -423,6 +435,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -436,6 +457,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -511,7 +533,8 @@ const createFamily = async (
         children: [],
         articleWriteHistory: [],
         articleViewHistory: [],
-        commentHistory: []
+        commentHistory: [],
+        authHistory: []
     }
 &nbsp;
     const familyColl = await families();
@@ -614,6 +637,15 @@ const updateFamily = async (
     return newFamily;
 }
 &nbsp;
+const updateFamilyAuthHistory = <span class="fstat-no" title="function not covered" >async (id, entry) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const families = await families();</span>
+<span class="cstat-no" title="statement not covered" >    const update = await families.updateOne({_id: helpers.idHandler(id)}, {$push: {authHistory: entry}});</span>
+<span class="cstat-no" title="statement not covered" >    if (update.modifiedCount == 0){</span>
+<span class="cstat-no" title="statement not covered" >        throw 'Error: Could not update family history successfully'</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    return getFamilyById(id);</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
 const removeFamily = async (id) =&gt; {
     id = helpers.idHandler(id, 'Family');
 &nbsp;
@@ -638,6 +670,7 @@ module.exports = {
     getAllFamilies,
     getFamilyById,
     updateFamily,
+    updateFamilyAuthHistory, 
     removeFamily
 }</pre></td></tr></table></pre>
 
@@ -646,7 +679,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-30T00:32:15.604Z
+                at 2022-12-02T00:14:15.028Z
             </div>
         <script src="../prettify.js"></script>
         <script>

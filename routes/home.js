@@ -8,9 +8,13 @@ router.get('/', requiresAuth() , async (req, res) => {
     try {
         user = await userData.getByEmail( req.oidc.user.email );
     } catch (e) {
-        res.redirect('/users/register')
+        return res.redirect('/users/register');
     }
-    if(user) res.status(200).render('home')
+    if(user && req.session.user){
+        return res.status(200).render('home');
+    } else {
+        return res.redirect('/users/twofa');
+    }
 })
 
 
