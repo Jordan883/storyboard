@@ -137,10 +137,10 @@ module.exports = {
       return articlesList;
   },
 
-  async getArticlesByRestrict(level)
+  async getArticlesByRestrict(level, posteremail)
   {
       const articleCollection = await articles();
-      const articlesList = await articleCollection.find({ content_rating: { $gte: level } }, {}).toArray();
+      const articlesList = await articleCollection.find({ $or: [{content_rating: { $gte: level } }, {poster: posteremail}]}, {}).toArray();
       if (!articlesList) throw 'could not get all articles';
       return articlesList;
   },
